@@ -1,0 +1,70 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/AEMOO/1#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix diagen: <http://purl.org/datanode/diagen/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/AEMOO/1#>
+    a foaf:Document ;
+    rdfs:comment "0) having a resource >> access, receive, Resource 1) having a set of summarization methods mapped to resource types >> map, Method, summarize, Type 2) identify the type of the resource >> identify, Type 3) select the summarization method using the type as selection criteria >> select, summarize, Method, Type, Criteria 4) extract a subset of the available data about the resource using the summarization method >> extract, Subset, Data, Resource, summarize, Method" ;
+    rdfs:label "Aemoo results are highly contextualized. The context is given by an EKP, determined based on the resource type. [...] Its input is an entity URI, e.g. dbpedia:Barack Obama. Its output is an RDF graph corresponding to the summarization provided by the entity’s EKP  (selected based on the entity type). The RDF graph is obtained by generating a SPARQL CONSTRUCT out of the selected EKP.  EKPs are available as OWL ontologies, and there are currently around 200 EKPs that have been extracted from DBpedia and the Wikipedia linking structure." .
+
+:DBPedia
+    void:sparqlEndpoint <http://dbpedia.org/sparql> ;
+	dn:hasPortion :aboutResource .
+
+:aboutResource
+    dn:describes dbpedia:Barack_Obama ;
+	dn:isPortionOf :DBPedia ;
+	dn:remodelledTo :resourceSummary .
+	
+:dbpediaTypes
+    dn:typesOf :DBPedia .
+
+:knowledgePatternOfResourceType
+    dn:describedBy :knowledgePatterns ;
+    dn:describes :resourcePrimaryType ;
+    dn:isSelectionOf :summarizationMethods .
+
+:knowledgePatterns
+    dn:extractedFrom :DBPedia .
+
+:resourcePrimaryType
+    dn:isSelectionOf :resourceTypes .
+
+:resourceSummary
+    dn:describes dbpedia:Barack_Obama ;
+    dn:isStandInOf :aboutResource ;
+    dn:isSummarizationOf :aboutResource ;
+    dn:remodelledFrom :aboutResource ; 
+    dn:usesSchema :knowledgePatternOfResourceType .
+
+:resourceTypes
+    dn:isPortionOf :dbpediaTypes ;
+    dn:isSectionOf :aboutResource .
+
+:summarizationMethods
+    dn:combinationFrom :dbpediaTypes, :knowledgePatterns .
+	
+<http://purl.org/NET/rdflicense/cc-by-sa3.0>
+        a odrl:Policy ;
+		odrl:asset :DBPedia ;
+		dct:hasVersion "3.0" ;
+		rdfs:label   "Creative Commons CC-BY-SA 3.0";
+		dct:language <http://www.lexvo.org/page/iso639-3/eng>;
+		odrl:permission  cc:DerivativeWorks; 
+		odrl:permission cc:Distribution ;
+		odrl:permission cc:Reproduction;
+		odrl:duty cc:Attribution ;
+		odrl:duty cc:Notice;
+		odrl:duty cc:ShareAlike;
+		cc:legalcode <http://creativecommons.org/licenses/by-sa/3.0/legalcode> ;					
+		rdfs:seeAlso <http://creativecommons.org/licenses/by-sa/3.0/> . 

@@ -1,0 +1,5 @@
+-c 0 -r Prolog -k ORIGINAL -d use-cases/dataflow1 -q http://purl.org/datanode/ppr/example/output
+-c 0 -r Prolog -k EVOLVED -d use-cases/dataflow1 -q http://purl.org/datanode/ppr/example/output
+-c 1 -r Prolog -k ORIGINAL -d use-cases/dataflow1 -q http://purl.org/datanode/ppr/example/output
+-c 1 -r Prolog -k EVOLVED -d use-cases/dataflow1 -q http://purl.org/datanode/ppr/example/output
+

@@ -1,0 +1,5 @@
+-c 0 -r SPIN -k ORIGINAL -d use-cases/dataflow1 -q http://purl.org/datanode/ppr/example/output
+-c 0 -r SPIN -k EVOLVED -d use-cases/dataflow1 -q http://purl.org/datanode/ppr/example/output
+-c 1 -r SPIN -k ORIGINAL -d use-cases/dataflow1 -q http://purl.org/datanode/ppr/example/output
+-c 1 -r SPIN -k EVOLVED -d use-cases/dataflow1 -q http://purl.org/datanode/ppr/example/output
+
