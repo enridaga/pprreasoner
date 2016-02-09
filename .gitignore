@@ -1,5 +1,5 @@
 ./ppr-evaluation/experiment.log
-./ppr-evaluation/results/
+ppr-evaluation/results/
 .metadata
 bin/
 tmp/
