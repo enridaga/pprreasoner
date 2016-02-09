@@ -1,0 +1,56 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/REXPLORE/5#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/REXPLORE/5#>
+    a foaf:Document ;
+    rdfs:comment "0) Rexplore takes advantage of the OWL ontology 1) Every publication tagged with topic T1 is also tagged with topic T2 if T2 is broaderGeneric than T1 or relatedEquivalent to T1" ;
+    rdfs:label "Rexplore takes advantage of the Klink-generated OWL knowledge base by considering every publication tagged with  topic T1 to be also about topic T2, if T2 is broaderGeneric than T1, or relatedEquivalent to T1 " .
+
+:T1T2publications
+    dn:hasPortion [
+        dn:isPortionOf :T1publications
+    ], [
+        dn:isPortionOf :T2publications
+    ] ;
+    dn:isInferenceOf :ontology ;
+    dn:isSelectionOf :publicationTags .
+
+:T1publications
+    dn:hasSection [
+        dn:describes :T1 ;
+        dn:isPortionOf :aboutT1T2
+    ] ;
+    dn:isSelectionOf :publicationTags .
+
+:T2publications
+    dn:hasSection [
+        dn:describes :T2 ;
+        dn:isPortionOf :aboutT1T2
+    ] ;
+    dn:isSelectionOf :publicationTags .
+
+:aboutT1T2
+    dn:describes :T1, :T2 ;
+    dn:isPortionOf :transitiveSection .
+
+:knowledgeBase
+    dn:hasPart :ontology .
+
+:ontology
+    dn:hasSection :transitiveSection .
+
+:publicationTags
+    dn:isSectionOf :knowledgeBase .
+
+:transitiveSection
+    dn:hasVocabulary [
+        dn:describes :broaderGeneric, :relatedEquivalent
+    ] .
+

@@ -1,0 +1,18 @@
+-c 0 -r Prolog -k EVOLVED -d test-cases/dataflow1 -q http://purl.org/datanode/ppr/example/output1
+-c 1 -r Prolog -k EVOLVED -d test-cases/dataflow1 -q http://purl.org/datanode/ppr/example/output1
+-c 0 -r SPIN -k EVOLVED -d test-cases/dataflow1 -q http://purl.org/datanode/ppr/example/output1
+-c 1 -r SPIN -k EVOLVED -d test-cases/dataflow1 -q http://purl.org/datanode/ppr/example/output1
+-c 0 -r Prolog -k EVOLVED -d test-cases/dataflow2 -q http://purl.org/datanode/ppr/example/output2
+-c 1 -r Prolog -k EVOLVED -d test-cases/dataflow2 -q http://purl.org/datanode/ppr/example/output2
+-c 0 -r SPIN -k EVOLVED -d test-cases/dataflow2 -q http://purl.org/datanode/ppr/example/output2
+-c 1 -r SPIN -k EVOLVED -d test-cases/dataflow2 -q http://purl.org/datanode/ppr/example/output2
+-c 0 -r Prolog -k EVOLVED -d test-cases/dataflow3 -q http://purl.org/datanode/ppr/example/output3
+-c 1 -r Prolog -k EVOLVED -d test-cases/dataflow3 -q http://purl.org/datanode/ppr/example/output3
+-c 0 -r SPIN -k EVOLVED -d test-cases/dataflow3 -q http://purl.org/datanode/ppr/example/output3
+-c 1 -r SPIN -k EVOLVED -d test-cases/dataflow3 -q http://purl.org/datanode/ppr/example/output3
+-c 0 -r Prolog -k EVOLVED -d test-cases/dataflow4 -q http://purl.org/datanode/ppr/example/output4
+-c 1 -r Prolog -k EVOLVED -d test-cases/dataflow4 -q http://purl.org/datanode/ppr/example/output4
+-c 0 -r SPIN -k EVOLVED -d test-cases/dataflow4 -q http://purl.org/datanode/ppr/example/output4
+-c 1 -r SPIN -k EVOLVED -d test-cases/dataflow4 -q http://purl.org/datanode/ppr/example/output4
+
+

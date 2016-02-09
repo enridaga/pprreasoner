@@ -1,0 +1,36 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/DBREC/3#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/DBREC/3#>
+    a foaf:Document ;
+    rdfs:comment "0) having data with redundancies and inconsistencies >> access, Data, Redundancy, Inconsistency 1) remove redundancies >> remove, Redundancy 2) remove inconsistencies >> remove, Inconsistency 3) remove duplicates (same as redundancies?) >> remove, Duplicate 4) data is now 55.7 percent of before >> Data, Now, Before" ;
+    rdfs:label "On the other hand, we identified  lots of redundancy and inconsistencies in our DBpedia subset7. Especially, many links  between resources are defined redundantly as http://dbpedia.org/ontology/xxx and at the  same time as http://dbpedia.org/property/xxx. We then removed duplicates, leading to  1,675,711 triples, i.e. only 55.7% of the original dataset." .
+
+:good
+    dn:disjointPart [
+        dn:hasPart :inconsistent, :redundant
+    ] ;
+    dn:inconsistentWith :inconsistent, :redundant ;
+    dn:isPartOf :origin ;
+    dn:overlappingCapability :redundant .
+
+:inconsistent
+    dn:isPartOf :origin .
+
+:obtained
+    dn:cleanedFrom :DBPedia ;
+    dn:isCopyOf :good .
+
+:origin
+    dn:isPartOf :DBPedia .
+
+:redundant
+    dn:isPartOf :origin .
+

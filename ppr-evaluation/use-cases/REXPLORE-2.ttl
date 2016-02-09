@@ -1,0 +1,39 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/REXPLORE/2#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/REXPLORE/2#>
+    a foaf:Document ;
+    rdfs:comment "0) Rexplore (knowledge base) includes portions of DBPedia, DBLP, MAS, Geonames, Wikipedia, Google Scholar 1) The topic ontology uses information collected from Google Scholar, Eventseer and Wikipedia 2) The geographic information and the standardization of the affiliations rely on information from DBPedia and Geonames" ;
+    rdfs:label "[...] Rexplore integrates a variety of data sources in different formats, including:  DBpedia, DBLP++ (http://dblp.l3s.de/dblp.rdf.gz), the MAS API, GeoNames (http://www.geonames.org/),  and parsed web pages (e.g., Wikipedia, Google Scholar).  [...] The process of generating the populated topic ontology exploits information collected from Google Scholar,  EventSeer (http://eventseer.net/) and Wikipedia. The geographic information and the standardization of the  affiliations rely on information from DBpedia and GeoNames [...] . " .
+
+:affiliations
+    dn:processedFrom :DBPedia, :Geonames .
+
+:geographicInformation
+    dn:processedFrom :DBPedia, :Geonames .
+
+:knowledgeBase
+    dn:hasPart :affiliations, :geographicInformation, :ontology, [
+        dn:isPartOf :DBPedia
+    ], [
+        dn:isPartOf :DBLP
+    ], [
+        dn:isPartOf :MAS
+    ], [
+        dn:isPartOf :Geonames
+    ], [
+        dn:isPartOf :Wikipedia
+    ], [
+        dn:isPartOf :GoogleScholar
+    ] .
+
+:ontology
+    dn:processedFrom :EventSeer, :GoogleScholar, :Wikipedia .
+

@@ -1,0 +1,33 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/REXPLORE/1#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/REXPLORE/1#>
+    a foaf:Document ;
+    rdfs:comment "0) Rexplore Ontology is automatically populated 1) The Ontology includes Topics with a number of semantic relationships 2) The KnowledgeBase is generated using a combination of statistical methods and background knowledge 3) Background knowledge includes a corpus of publications 4) The Knowledge Base is augmented with geographic information" ;
+    rdfs:label "Rexplore (uses) a fine-grained,  automatically populated topic ontology, in which topics are identified and structured according to a number of semantic relationships.  The resulting knowledge base is generated using a combination of statistical methods and background knowledge on the basis of a large-scale  corpus of publications [...] and is then augmented with geographic information [...] . " .
+
+:backgroundKnowledge
+    dn:hasPart :corpusOfPublications .
+
+:geographicInformation
+    dn:isExtractionOf :backgroundKnowledge .
+
+:knowledgeBase
+    dn:combinationFrom :backgroundKnowledge, :statisticsResults ;
+    dn:hasPart :geographicInformation .
+
+:ontology
+    dn:describes :topicsSet ;
+    dn:hasRelations :semanticRelations ;
+    dn:isPartOf :knowledgeBase .
+
+:statisticsResults
+    dn:isStatisticOf :backgroundKnowledge .
+

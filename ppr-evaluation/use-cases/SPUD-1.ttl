@@ -1,0 +1,37 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/SPUD/1#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbprop: <http://dbpedia.org/property/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<http://purl.org/datanode/ex/0.2/SPUD/1#>
+    a foaf:Document ;
+    rdfs:comment "0) having data >> access, Data 1) identify relevant entities for data >> identify, Relevance, Entity, Data 0) having data >> access, Data 1) make a snapshot of data and save it >> photograph, Data, Snapshot 2) link the snapshot to the data >> link, Snapshot 3) annotate the snapshot using latest W3C draft >> annotate, Provenance, Latest" ;
+    rdfs:label "[...] incremental semantic lifting of data. [...] We capture provenance (using the latest W3C working draft) by making views over datasets immutable and tracking  differences between views (effectively allowing sharing of data between views). The meta-information pertaining to  provenance and each data view is itself stored in RDF and can be made externally visible." .
+
+:view1
+    dn:hasAnnotation [
+        dn:usesSchema <http://www.w3.org/ns/prov#>
+    ], [
+        dn:extractedFrom :view1
+    ] ;
+    dn:hasNextVersion :view2 ;
+    dn:isSnapshotOf :database .
+
+:view2
+    dn:hasAnnotation [
+        dn:usesSchema <http://www.w3.org/ns/prov#>
+    ], [
+        dn:extractedFrom :view2
+    ] ;
+    dn:hasNextVersion :view3 ;
+    dn:hasPrevVersion :view1 ;
+    dn:isSnapshotOf :database .
+

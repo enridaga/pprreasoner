@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +38,7 @@ public class PrologReasoner implements PPRReasoner, PPRReasonerObservable {
 		this.listener = listener;
 	}
 
-	private PrologReasoner(File... sources) throws IOException {
+	private PrologReasoner(File... sources) throws PPRReasonerException {
 		this.sources = sources;
 		setListener(new PPRReasonerListenerImpl());
 	}
@@ -50,7 +49,7 @@ public class PrologReasoner implements PPRReasoner, PPRReasonerObservable {
 		setListener(new PPRReasonerListenerImpl());
 	}
 
-	public void load(File f) throws PPRReasonerException{
+	public void load(File f) throws PPRReasonerException {
 		listener.beforeResource(f.toString());
 		l.debug("Loading source {}", f);
 		try {
@@ -60,8 +59,8 @@ public class PrologReasoner implements PPRReasoner, PPRReasonerObservable {
 		}
 		listener.afterResource(f.toString());
 	}
-	
-	public String loadStream(InputStream fis) throws IOException {
+
+	private String loadStream(InputStream fis) throws IOException {
 		InputStream is = new BufferedInputStream(fis);
 		try {
 			StringBuilder sb = new StringBuilder();
@@ -85,15 +84,17 @@ public class PrologReasoner implements PPRReasoner, PPRReasonerObservable {
 			is.close();
 		}
 	}
-@Override
-public PPRReasonerListener observer() {
-	return listener;
-}
+
+	@Override
+	public PPRReasonerListener observer() {
+		return listener;
+	}
+
 	public void init() throws PPRReasonerException {
-		l.debug("Starting");
-		listener.beforeResources();
+		listener.beforeSetup();
 		this.prolog = new jPrologAPI("");
-		// Setting this to false would throw an exception when a predicate does not have any fact.
+		// Setting this to false would throw an exception when a predicate does
+		// not have any fact.
 		this.prolog.setFailUnknownPredicate(true);
 		for (File f : this.sources) {
 			load(f);
@@ -104,7 +105,7 @@ public PPRReasonerListener observer() {
 			l.debug("Loading source 'meta-ont'");
 			// The ontology file is embedded
 			try {
-				this.prolog.consultSource(IOUtils.toString(PrologReasoner.class.getResourceAsStream("/ontology.pl")));
+				this.prolog.consultSource(loadStream(PrologReasoner.class.getResourceAsStream("/ontology.pl")));
 			} catch (IOException e) {
 				throw new PPRReasonerException(e);
 			}
@@ -112,8 +113,7 @@ public PPRReasonerListener observer() {
 		}
 
 		l.debug("KB is loaded, now querying");
-		listener.afterResources();
-		// listener.setKBSize(prolog.);
+		listener.afterSetup();
 	}
 
 	public boolean isTrue(String expression) {
@@ -217,7 +217,7 @@ public PPRReasonerListener observer() {
 	 * @return
 	 * @throws IOException
 	 */
-	public static PrologReasoner createCustom(File... sources) throws IOException {
+	public static PrologReasoner createCustom(File... sources) throws PPRReasonerException {
 		List<File> stack = new ArrayList<File>();
 		for (File s : sources) {
 			stack.add(s);
@@ -234,13 +234,13 @@ public PPRReasonerListener observer() {
 	 * @return
 	 * @throws IOException
 	 */
-	public static PrologReasoner createDefault(File... sources) throws IOException {
+	public static PrologReasoner createDefault(File... sources) throws PPRReasonerException {
 		List<File> stack = new ArrayList<File>();
 		try {
 			stack.add(new File(PrologReasoner.class.getResource("/relations.pl").toURI()));
 			stack.add(new File(PrologReasoner.class.getResource("/rules.pl").toURI()));
 		} catch (URISyntaxException e) {
-			throw new IOException(e);
+			throw new PPRReasonerException(e);
 		}
 		for (File s : sources) {
 			stack.add(s);

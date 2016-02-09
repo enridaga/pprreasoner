@@ -1,0 +1,65 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/DISCOU/1#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbprop: <http://dbpedia.org/property/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<http://purl.org/datanode/ex/0.2/DISCOU/1#>
+    a foaf:Document ;
+    rdfs:comment "0) having a dataset of resources and topics >> Dataset, Resource, Topic 1) having a single resource from that dataset >> Single, receive 2) identify items having topics in common with the resource >> identify, SharedFeature 3) rank them according to a score representing how much important are the common topics for both resource >> rank, Criteria, Score, Representation, Relevance, SharedFeature, ResourcePair 4) truncate 10 exemplars according to rank >> truncate, Number, 10, Exemplar, Criteria, Rank 5) describe the exemplars with title, summary >> describe, Exemplar, Summary, Title 6) explain by the most important shared common topic >> explain, Criteria, Best, SharedFeature" ;
+    rdfs:label "Have a dataset of items and related topics, annotated with a relevance score. Given an item, find the 10 items with the most similar topics, listed in order  of relevance and displayed with type, title, summary, location and the most relevant common topic." .
+
+:dset
+    void:classPartition :Resource, :Topic ;
+    void:propertyPartition :hasTopic .
+
+:hasTopic
+    dn:isDescribedBy :hasTopicVoc .
+
+:hasTopicVoc
+    dn:hasPortion [
+        dn:disjointPortion owl:nothing ;
+        dct:hasPart :hasTopic
+    ] ;
+    dn:isPortionOf [
+        dn:isVocabularyOf :dset ;
+        dct:hasPart :Resource, :Topic, :hasTopic
+    ] .
+
+:myResource
+    dn:isDescribedBy :dset .
+
+:myResourceTopics
+    dn:describes :myResource ;
+    dn:hasVocabulary :hasTopicVoc ;
+    dn:isPortionOf :dset ;
+    dn:isSectionOf :dset .
+
+:similarResources
+    dn:hasVocabulary :hasTopicVoc ;
+    dn:isPortionOf :dset ;
+    dn:isSectionOf :dset .
+
+:topics
+    dn:isPortionOf :dset ;
+    dn:samePopulation [
+        dn:hasTypes [
+            dn:disjointPortion owl:nothing ;
+            dct:hasPart :Topic
+        ] ;
+        dn:isPortionOf :myResourceTopics
+    ], [
+        dn:hasTypes [
+            dn:disjointPortion owl:nothing ;
+            dct:hasPart :Topic
+        ] ;
+        dn:isPortionOf :similarResources
+    ] .
+

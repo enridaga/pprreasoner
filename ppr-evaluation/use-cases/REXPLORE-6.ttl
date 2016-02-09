@@ -1,0 +1,58 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/REXPLORE/6#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/REXPLORE/6#>
+    a foaf:Document ;
+    rdfs:comment "0) Visualized information include publication trends, author trends and migration trends 1) publication trends is the number of publications associated with a semantically enriched topic on a timeline 2) author trends is the number of authors associated with a semantically enriched topic on a timeline 3) migration trends is the number of estimated migrations between two topics computed by analyzing the shifting in authors' interest" ;
+    rdfs:label "Rexplore is able to visualize different topic trends: 1) publication trends, 2) author trends and 3) migration trends.  The first two are the number of publications or authors associated with a semantically enriched topic on a timeline.  The latter is defined as the number of estimated migrations between two topics and is computed by analyzing the shifting in authors’ interest [...]" .
+
+:authorTrends
+    dn:isStatisticOf [
+        dn:hasSection [
+            dn:describes :aTopic, :authors, :time
+        ] ;
+        dn:isPortionOf :publicationTags
+    ] .
+
+:authors
+    dn:isDescribedBy :knowledgeBase .
+
+:migrationTrends
+    dn:isInterpretationOf [
+        dn:hasSection [
+            dn:describes :aTopic, :time, :topics
+        ] ;
+        dn:isPortionOf :publicationTags
+    ] .
+
+:publicationTags
+    dn:isPortionOf :knowledgeBase .
+
+:publicationTrends
+    dn:isStatisticOf [
+        dn:hasSection [
+            dn:describes :aTopic, :publications, :time
+        ] ;
+        dn:isPortionOf :publicationTags
+    ] .
+
+:publications
+    dn:isDescribedBy :publicationTags .
+
+:time
+    dn:isDescribedBy :knowledgeBase .
+
+:topicTrends
+    dn:hasPart :authorTrends, :migrationTrends, :publicationTrends .
+
+:topics
+    dn:hasPortion :aTopic ;
+    dn:isDescribedBy :knowledgeBase .
+

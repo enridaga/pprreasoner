@@ -1,0 +1,55 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/WATSON/1#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/WATSON/1#>
+    a foaf:Document ;
+    rdfs:comment "0) Receives the clues as electronic text 1) The clues is parsed into different keywords and sentence fragments 2) The system finds statistically related phrases 3) Executes thousands of proven language analysis algorithms simultaneously 4) Some of these answers are found by many independent algorithms 5) Verify solutions with the database to check whether they make sense 6) Evaluate if the candidate response is sufficiently confident 7) Active the buzzer if the response looks good" ;
+    rdfs:label "When playing Jeopardy! all players must wait until host Alex Trebek reads each clue in its entirety,  after which a light is lit as a 'ready' signal; the first to activate their buzzer button wins the  chance to respond. Watson received the clues as electronic texts at the same moment they were  made visible to the human players. It would then parse the clues into different keywords and sentence  fragments in order to find statistically related phrases. Watson's main innovation was not in the creation  of a new algorithm for this operation but rather its ability to quickly execute thousands of proven language  analysis algorithms simultaneously to find the correct answer. The more algorithms that find  the same answer independently the more likely Watson is to be correct. Once Watson has a small number of potential solutions, it is able to check against its database to ascertain  whether the solution makes sense. In a sequence of 20 mock games, human participants were able  to use the average six to seven seconds that Watson needed to hear the clue and decide whether to signal for responding.  During that time, Watson also has to evaluate the response and determine whether it is sufficiently  confident in the result to signal. Part of the system used to win the Jeopardy! contest was the  electronic circuitry that receives the 'ready' signal and then examined whether Watson's  confidence level was great enough to activate the buzzer." .
+
+:buzzerActivators
+    dn:isPortionOf :candidateAnswers ;
+    dn:overlappingPopulationWith :confidentAnswers .
+
+:candidateAnswers
+    dn:isPortionOf :relatedPhrases .
+
+:confidentAnswers
+    dn:hasSection :goodConfidence ;
+    dn:isPortionOf :verifiedAnswers .
+
+:goodConfidence
+    dn:isPortionOf :confidence .
+
+:keywords
+    dn:processedFrom :clues .
+
+:relatedPhrases
+    dn:hasSection :confidence ;
+    dn:isStatisticOf [
+        dn:combinationFrom :keywords, :sentenceFragments, :unstructuredKnowledgeBase
+    ] .
+
+:sentenceFragments
+    dn:processedFrom :clues .
+
+:structuredKnowledgeBase
+    dn:isPartOf :KB .
+
+:unconfidentAnswers
+    dn:disjointPortionWith :confidentAnswers ;
+    dn:isPortionOf :verifiedAnswers .
+
+:unstructuredKnowledgeBase
+    dn:isPartOf :KB .
+
+:verifiedAnswers
+    dn:isSelectionOf :candidateAnswers ;
+    dn:processedFrom :structuredKnowledgeBase .
+

@@ -1,0 +1,10 @@
+has_relation('http://purl.org/datanode/ppr/example/input3a','50fde4eabd65b58700a8938ec903b841','http://purl.org/datanode/ns/hasCopy') . 
+has_relation('85d7f81d39ac6f4925b584c3a435770d','http://purl.org/datanode/ppr/example/a','http://purl.org/datanode/ns/isCopyOf') . 
+has_relation('397e45024151d27daa2cee1a9cb102ae','8fb36bae62da5f8376726c87fd02738f','http://purl.org/datanode/ns/hasSelection') . 
+has_relation('74ccbfde8098b30b1fca51b09d51b048','5ad52c34ec345880e0dd5019f6d594fb','http://purl.org/datanode/ns/remodelledTo') . 
+has_relation('http://purl.org/datanode/ppr/example/output3','85d7f81d39ac6f4925b584c3a435770d','http://purl.org/datanode/ns/isPortionOf') . 
+has_relation('http://purl.org/datanode/ppr/example/outputNone','e9c0e489a6b34c174690bfb9d5b512e3','http://purl.org/datanode/ns/isSelectionOf') . 
+has_relation('50fde4eabd65b58700a8938ec903b841','74ccbfde8098b30b1fca51b09d51b048','http://purl.org/datanode/ns/refactoredInto') . 
+has_relation('e9c0e489a6b34c174690bfb9d5b512e3','http://purl.org/datanode/ppr/example/input3b','http://purl.org/datanode/ns/remodelledFrom') . 
+has_relation('5ad52c34ec345880e0dd5019f6d594fb','397e45024151d27daa2cee1a9cb102ae','http://purl.org/datanode/ns/hasSection') . 
+has_relation('8fb36bae62da5f8376726c87fd02738f','http://purl.org/datanode/ppr/example/a','http://purl.org/datanode/ns/hasPart') . 

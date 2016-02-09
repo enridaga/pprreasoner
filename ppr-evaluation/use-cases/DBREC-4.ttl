@@ -1,0 +1,45 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/DBREC/4#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/DBREC/4#>
+    a foaf:Document ;
+    rdfs:comment "0) having dbpedia >> access, Dbpedia 1) identify artists >> identify, Artist 2) identify links between artists >> identify, Link, Artist, Between 3) compute the number of links for each artist >> compute, Number, Link, Each, Artist 4) the artists with no links are more then 50%, ie 21.211 >> Artist, Without, Link, MoreThen, 50% 5) the artists with three links are 9,555 >> Artist, 3, Link, 9555 6) the maximum number of links is 14 >> Max, Number, Link, 14 7) identify indirect links between artists >> identify, Indirect, Link, Between, Artist" ;
+    rdfs:label "We also analysed the dataset to identify how artists are related to each other (by direct links)  in DBpedia (Fig. 4). We observed that 21,211 of them (more than 50%) are not linked to any artists,  and 9,555 are linked to three of them, the maximum being 14 links from one artist to 14 others.  Then, by using indirect links for computing semantic distance with LDSD, we are able to provide  recommendations for these 21,211 isolated artists." .
+
+:artists
+    dn:isSelectionOf :DBPedia .
+
+:artists-links
+    dn:isSectionOf :artists .
+
+:artists-with-14-links
+    dn:isPortionOf :artists-links ;
+    void:properties "14"^^xsd:int .
+
+:artists-with-no-link
+    dn:disjointPortion :artists-links ;
+    dn:isInferenceOf :link-stats ;
+    dn:isPortionOf :artists ;
+    dn:isSelectionOf :link-stats ;
+    void:entities "21211"^^xsd:int .
+
+:artists-with-three-links
+    dn:isInferenceOf :link-stats ;
+    dn:isPortionOf :artists-links ;
+    dn:isSelectionOf :link-stats ;
+    void:entities "9555"^^xsd:int .
+
+:indirect-links
+    dn:isInferenceOf :artists-links .
+
+:link-stats
+    dn:isStatisticOf :artists ;
+    dn:samePopulation :artists .
+

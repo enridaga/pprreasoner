@@ -1,0 +1,22 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/DBREC/11#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/DBREC/11#>
+    a foaf:Document ;
+    rdfs:comment "0) having dataset >> access, Dataset 1) cleaning the dataset >> clean, Dataset 2) the dataset is reduced to a total of 1,073,077 triples >> Dataset, reduce, Total, 1073077" ;
+    rdfs:label "We then cleaned-up the dataset and reduced it to a total of 1,073,077 triples." .
+
+:cleaned
+    dn:cleanedFrom :origin ;
+    void:triples "1073077"^^xsd:int .
+
+:origin
+    a dn:Datanode .
+

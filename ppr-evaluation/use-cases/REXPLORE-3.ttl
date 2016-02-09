@@ -1,0 +1,52 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/REXPLORE/3#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/REXPLORE/3#>
+    a foaf:Document ;
+    rdfs:comment "0) The ontology is populated and updated by the Klink algorithm 1) The algorithm takes as input a corpus of publications annotated with keywords 2) Keywords are user-defined or extracted from the text 3) The algorithm identifies research areas (topics) from the given set of keywords, tidying them up by fixing errors and by removing irrelevant keywords 4) The algorithm automatically computes semantic relationships between research areas 5) The algorithm returns the semantic relationships between research areas (topics) expressed in OWL 6) The algorithm computes: skos:broaderGeneric, contributesTo (sub-property of skos:related) and relatedEquivalent (sub-property of skos:related) 7) The ontology extends BIBO (which in turn extends SKOS and FOAF) 8) The ontology comprises 1500 topics linked by almost 3000 semantic relationships" ;
+    rdfs:label "This ontology is automatically populated and periodically updated by the Klink algorithm [...], which takes as input  a corpus of publications, annotated with keywords (these can be user- defined or automatically extracted from the text  of a publication) and performs three key operations, using a combination of statistical methods and background knowledge: • It identifies research areas from the given set of keywords, tidying them up by fixing errors and by removing keywords  that do not denote research areas – e.g., “Case Study” or “NeOn Project”. • It automatically computes three types of semantic relationships between research areas [...] • It returns a knowledge base of semantic relationships expressed in OWL. In particular, Klink computes the following three relationships between topics: • skos:broaderGeneric. [...] • contributesTo. This is defined as a sub-property of skos:related [...] • relatedEquivalent. This is also defined as a sub-property of skos:related [...] Our ontology builds on the BIBO ontology, which in turn builds on SKOS, FOAF and other standards.  [...] Currently it comprises 1500 topics linked by almost 3000 semantic relationships. " .
+
+:contributesTo
+    rdfs:subPropertyOf skos:related .
+
+:corpusOfPublications
+    dn:hasSection :keywords .
+
+:extractedKeywords
+    dn:isExtractionOf :publicationTexts .
+
+:keywords
+    dn:hasPortion :correctKeywords, :erroneousKeywords, :extractedKeywords, :irrelevantKeywords, :userDefinedKeywords ;
+    dn:hasSelection :correctKeywords .
+
+:ontology
+    dn:cleanedFrom :keywords ;
+    dn:describes :topicsSet ;
+    dn:hasPortion :correctKeywords ;
+    dn:hasSection :relations ;
+    dn:optimizedFrom :keywords ;
+    dn:usesSchema <http://purl.org/ontology/bibo/> .
+
+:relatedEquivalent
+    rdfs:subPropertyOf skos:related .
+
+:relations
+    dn:hasVocabulary :semanticRelations ;
+    dn:processedFrom :corpusOfPublications .
+
+:semanticRelations
+    dn:describes :constributesTo, :relatedEquivalent, skos:broaderGeneric .
+
+:topicsSet
+    void:entities "1500"^^xsd:int .
+
+<http://purl.org/ontology/bibo/>
+    dn:usesSchema <http://www.w3.org/2004/02/skos/core#>, <http://xmlns.com/foaf/0.1/> .
+

@@ -1,3 +1,6 @@
+:- consult(full-rules).
+:- consult(relations).
+:- consult(ontology).
 
 /* Test for the attribution */
 has_policy(source1,'http://www.w3.org/ns/odrl/2/duty http://creativecommons.org/ns#Attribution') .

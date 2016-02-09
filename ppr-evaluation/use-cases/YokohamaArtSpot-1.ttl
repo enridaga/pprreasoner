@@ -1,0 +1,40 @@
+# page,nearEvents,nearInstitutions,nearQA
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/YokohamaArtSpot/1#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbprop: <http://dbpedia.org/property/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<http://purl.org/datanode/ex/0.2/YokohamaArtSpot/1#>
+    a foaf:Document ;
+    rdfs:comment "0) having data about locations, institutions and events >> access, Data, Location, Institution, Event 1) having a specific location >> receive, Location 2) identify latitude and longitude of the specific area >> identify, Latitude, Longitude, GeoLocation, Area 3) identify near institutions >> identify, Near, Institution 4) identify near events >> identify, Near, Event 5) represent institutions and events as locations >> represent, Institution, Event, Location" ;
+    rdfs:label "It uses following three different datasets as data sources; LODAC Museum, Yokohama Art LOD and PinQA. [...] PinQA is a social geographical Q&A service provided by NTT Resonant, Inc. that obtains and  shares users Q&As corresponding to the specified geographical regions in a map. [...] If a user takes an action, such as opening a new page that describes details about an institution,  this is queried to the SPARQL endpoints of each LOD. The application then presents new  information to the user using the data returned from the SPARQL endpoints. [...] When a user accesses the application, a map view is presented, as shown in Fig. 3.  This view gives users information on the kind of art they can experience by displaying institutions.   The locations of the current day’s events and Q&As related to the displayed area are also   presented on the map of Yokohama. [...] In this map view, the name, address, and geographical coordinates of institutions  to be presented are extracted from LODAC Museum with SPARQL using the latitudes and longitudes  of the displayed area. As for the event information, the application obtains data for the events  that would be held at those institutions included in the displayed area from Yokohama Art LOD using SPARQL." .
+
+:nearEvents
+    dn:hasSection [
+        dn:describes :latitude, :longitude
+    ] ;
+    dn:isPortionOf :Yokohama_Art_LOD .
+
+:nearInstitutions
+    dn:hasSection [
+        dn:describes :latitude, :longitude
+    ] ;
+    dn:isPortionOf :LODAC_Museum .
+
+:nearQA
+    dn:hasSection [
+        dn:describes :latitude, :longitude
+    ] ;
+    dn:isPortionOf :PinQA .
+
+:page
+    dn:combinationFrom :nearEvents, :nearInstitutions, :nearQA .
+

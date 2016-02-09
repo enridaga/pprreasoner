@@ -1,0 +1,36 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/DBREC/12#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ldsd: <http://dbrec.net/ldsd/ns#> .
+
+<http://purl.org/datanode/ex/0.2/DBREC/12#>
+    a foaf:Document ;
+    rdfs:comment "0) the LDSD ontology contains the class ldsd:Distance 1) the class ldsd:Distance represents the distance between two resources 2) ldsd:Distance uses ldsd:from and ldsd:to and ldsd:value 3) the LDSD ontology contains the class ldsd:Explanation 4) ldsd:Explanation has 4 subclasses: ldsd:DirectIn, ldsd:DirectOut, ldsd:IndirectIn and ldsd:IndirectOut 5) ldsd:Explanation store the links 6) ldsd:Explanation store the data used to compute the distance 6) ldsd:Explanation store the amount of similar links in the dataset" ;
+    rdfs:label "We thus designed a lightweight LDSD ontology4, accompanying the previous measure and containing two main classes: – ldsd:Distance, in order to represent the distance between two resources (using ldsd:from and ldsd:to) and its value (ldsd:value5) – ldsd:Explanation (and four subclasses: ldsd:DirectIn, ldsd:DirectOut, ldsd:IndirectIn and ldsd:IndirectOut), in order to store  the links and the property-value pairs (ldsd:property and ldsd:node) used to measure the distance, and how much similar links appear  in the dataset (ldsd:total)." .
+
+:artist
+    dn:describedBy :distance, :explanation, :recommendations .
+
+:distance
+    dn:hasSection ldsd:from, ldsd:to, ldsd:value ;
+    dn:usesSchema ldsd:Distance .
+
+:explanation
+    dn:hasPortion :inputData, :links, :linksAmountInDataset ;
+    dn:usesSchema ldsd:Explanation .
+
+:ldsd
+    dn:hasVocabulary :ldsdvoc .
+
+:ldsdvoc
+    dn:describes ldsd:Distance, ldsd:Explanation .
+
+:recommendations
+    dn:samePopulationAs :links .
+

@@ -1,0 +1,24 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/DBREC/8#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/DBREC/8#>
+    a foaf:Document ;
+    rdfs:comment "0) having a dataset which is a subset of dbpedia >> access, Dataset, Subset, Dbpedia 1) identify properties wrongly defined (lost data? meaningless data?) >> identify, Property, Wrong, Lost, Meaningless" ;
+    rdfs:label "Moreover, we identified 35 properties that were wrongly defined — while however used two times of less —,  such as http://dbpedia.org/property/extra18 and http://dbpedia.org/property/klfsgProperty. " .
+
+:dset
+    dn:isSectionOf :DBPedia .
+
+:with-wrong-properties
+    dn:inconsistentWith :with-wrong-properties ;
+    dn:isSectionOf :dset ;
+    dn:vocabulary :wrong-properties ;
+    void:properties "35"^^xsd:int .
+

@@ -1,0 +1,34 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/SPUD/2#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbprop: <http://dbpedia.org/property/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<http://purl.org/datanode/ex/0.2/SPUD/2#>
+    a foaf:Document ;
+    rdfs:comment "0) having the LiveTrac update service >> access, LiveTrac, Update, Service 1) listen the LiveTrac service for updates >> listen, LiveTrac, Service, Update 2) having a message from the LiveTrac service >> receive, Message, LiveTrac, Service 3) lift semantic data from the message using hierarchical clustering method >> lift, Data, Message, Method, HierarchicalClustering 4) represent the data using the event ontology and sub-ontology >> describe, Data, Ontology, SubOntology" ;
+    rdfs:label "one source of information in our scenario is the social media data obtained from the  LiveDrive trac update service that provides information about the city in the form of messages.  This data is lifted into an events ontology and a domain-specific sub-ontology is automatically  generated using a hierarchical clustering technique." .
+
+:LiveTrac
+    a dn:Datanode .
+
+:database
+    a dn:Datanode .
+
+:view1
+    dn:isExtractionOf [
+        dn:isSelectionOf :LiveTrac ;
+        dn:isUpdateOf :database
+    ] ;
+    dn:usesSchema <http://linkedevents.org/ontology/>, [
+        owl:imports <http://linkedevents.org/ontology/>
+    ] ;
+    skos:note "... using hierarchical clustering method ..."@en .
+

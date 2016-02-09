@@ -1,0 +1,46 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/DISCOU/11#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbprop: <http://dbpedia.org/property/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<http://purl.org/datanode/ex/0.2/DISCOU/11#>
+    a foaf:Document ;
+    rdfs:comment "0) having an open educational resource >> access, Resource 1) identify its textual component >> identify, TextualComponent 2) identify the list of entity/score annotations of the textual component >> identify, List, Resource, Score, Annotation, TextualComponent 3) identify other similar lists of entity/score annotations >> identify, OtherThan, Annotation, Similarity, Score, Resource 4) identify the textual components of the similar lists of entity/score annotations >> identify, TextualComponent, List, Similarity, Resource, Score, Annotation 5) identify the open educational resources having the similar textual components >> identify, Resource, Set, ResourceFeature, Similarity, TextualComponent 6) take the 10 most similar open educational resources >> take, Best, 10, Similarity, Resource, Set" ;
+    rdfs:label "textual components of open educational resources are automatically annotated with relevant entities  (using a named entity recognition system) so that these rich annotations can be searched by similarity." .
+
+:entities
+    dn:extractedFrom :text ;
+    dn:hasSection [
+        dn:hasVocabulary :score
+    ] ;
+    dn:overlappingPopulationWith [
+        dn:isPartOf :index
+    ] .
+
+:output
+    dn:isSelectionOf :similar .
+
+:similar
+    dn:hasPart :similarText ;
+    dn:hasSection [
+        dn:hasVocabulary :score
+    ] .
+
+:similarEntities
+    dn:isPartOf :index ;
+    dn:overlappingCapabilityWith :entities .
+
+:similarText
+    dn:hasExtraction :similarEntities .
+
+:text
+    dn:isPartOf :input .
+

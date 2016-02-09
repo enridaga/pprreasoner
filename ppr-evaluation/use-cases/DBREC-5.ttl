@@ -1,0 +1,49 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/DBREC/5#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/DBREC/5#>
+    a foaf:Document ;
+    rdfs:comment "0) optimize the dataset for the task >> optimize, Dataset, Task 1) identify the distinct properties used to link artists directly >> identify, Distinct, Property, Link, Artist, Direct 2) there are 578 distinct properties that link artists directly >> 578, Distinct, Property, Link, Direct 3) identify the distinct properties used to link artists to any other resource >> identify, Distinct, Property, Link, Artist, Resource, AnyOther 4) 767 distinct properties are used to link artists to any other resource >> 767, Distinct, Property, Link, Artist, AnyOther, Resource" ;
+    rdfs:label "We then focused on further optimisations not at the query-engine level, but at the dataset level,  analysing it more deeply, and we identified that: (1) 188 distinct properties are used to link artists  together directly; (2) 578 distinct properties are used to link an artist to any resource (including artists) ; (3) 767 distinct properties are used to link any resource (including artists) to an artist. " .
+
+:DBPedia
+    a dn:Datanode .
+
+:artists
+    dn:isSelectionOf :DBPedia .
+
+:artists-links
+    dn:hasVocabulary :relations ;
+    dn:isSectionOf :artists .
+
+:direct-links
+    dn:hasVocabulary :direct-relations ;
+    dn:isSectionOf :artists-links ;
+    void:properties "578"^^xsd:int .
+
+:direct-relations
+    dn:isPortionOf :relations .
+
+:indirect-links
+    dn:disjointSection :direct-links ;
+    dn:hasVocabulary :indirect-relations ;
+    void:properties "767"^^xsd:int .
+
+:indirect-relations
+    dn:differentCapability :direct-relations ;
+    dn:disjointPortion :direct-relations .
+
+:optimized
+    dn:isCopyOf :direct-links ;
+    dn:optimizedFrom :artists .
+
+:relations
+    dn:relationsOf :artists .
+

@@ -1,0 +1,61 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/EventMedia/1#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbprop: <http://dbpedia.org/property/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<http://purl.org/datanode/ex/0.2/EventMedia/1#>
+    a foaf:Document ;
+    rdfs:comment "0) having event descriptions from last.fm >> access, Event, Description, Last.fm 1) having event descriptions from eventful >> access, Event, Description, Eventful 2) having event descriptions from upcoming >> access, Event, Description, Upcoming 3) identify relevant descriptions from flickr >> identify, Relevance, Description, Flickr 3.1) identify descriptions of the event >> identify, Description, Event 3.2) identify things representatives of the event >> identify, Thing, Representative, Event 3.3) identify descriptions of things representative of the event >> identify, Description, Thing, Representative 4) identify relevant descriptions from dbpedia >> identify, Relevance, Description, Dbpedia 5) identify relevant descriptions from musicbrain >> identify, Relevance, Description, Musicbrain 6) identify relevant descriptions from foursquare >> identify, Relevance, Description, Foursquare 7) collect all the information about the event and related things in one place >> collect, Information, Event, RelatedThing, Thing, Location 8) represent the information using the LODE ontology >> describe, Information, Ontology, LODE" ;
+    rdfs:label "(Reference http://eventmedia.eurecom.fr/) is obtained from three public event directories (Last.fm, Eventful, Upcoming) and from one large media directory (Flickr).  It encapsulates media and events descriptions, enriched with background knowledge from external datasets such as DBpedia, MusicBrainz, BBC  and Foursquare. The dataset used the LODE ontology and consists of more than 30 millions RDF triples. [...] The data retrieved is de-serialized and exported into a common schema providing descriptions of events, venues, agents, attendees and photos. " ;
+    skos:note "?x dn:isSelectionOf :Flickr -> ?x dn:hasPortion [ dn:samePopulation [ dn:isPortionOf :Flickr ] ]"@en, "How to say that :collection does not have any other portion than the ones defined? In other places we used to say that a node has a portion some node which has disjointSection owl:nothing, but this is ugly verbose..."@en .
+
+:collection
+    dn:hasPortion [
+        dn:isCopyOf :descriptionsFromFlickr
+    ], [
+        dn:isCopyOf :descriptionsFromDbpedia
+    ], [
+        dn:isCopyOf :descriptionsFromMusicbrain
+    ], [
+        dn:isCopyOf :descriptionsFromFoursquare
+    ] .
+
+:descriptionsFromDbpedia
+    dn:isSelectionOf :Dbpedia ;
+    dn:samePopulation [
+        dn:isPortionOf :events
+    ] .
+
+:descriptionsFromFlickr
+    dn:isSelectionOf :Flickr ;
+    dn:samePopulation [
+        dn:isPortionOf :events
+    ] .
+
+:descriptionsFromFoursquare
+    dn:isSelectionOf :Foursquare ;
+    dn:samePopulation [
+        dn:isPortionOf :events
+    ] .
+
+:descriptionsFromMusicbrain
+    dn:isSelectionOf :Musicbrain ;
+    dn:samePopulation [
+        dn:isPortionOf :events
+    ] .
+
+:events
+    dn:combinationFrom :Eventful, :LastFM, :Upcoming .
+
+:output
+    dn:isRemodelledFrom :collection ;
+    dn:usesSchema :TheLODEOntology .
+

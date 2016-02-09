@@ -1,0 +1,29 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/DBREC/9#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/DBREC/9#>
+    a foaf:Document ;
+    rdfs:comment "0) having a dataset of artists and links to resources >> access, Dataset, Artist, Link, Resource 1) identify the properties used only once >> identify, Property, Usage, Once 2) 36 of the 183 properties used only ones are wrongly defined >> 36, 183, Property, Usage, Wrong" ;
+    rdfs:label "Then, from the 578 properties used to link artists to resources, 183 were used only one time and were  consequently useless for our recommendations, since it imply there is no more than one artist using on.  In addition, 36 of these properties were wrongly defined. " .
+
+:artistsAndLinksToResources
+    dn:hasSection :withPropertiesUsedOnlyOnce, :withPropertiesWronglyDefined .
+
+:propertiesWronglyDefined
+    dn:hasPart :propertiesUsedOnlyOnce .
+
+:withPropertiesUsedOnlyOnce
+    dn:hasVocabulary :propertiesUsedOnlyOnce ;
+    void:properties "183"^^xsd:int .
+
+:withPropertiesWronglyDefined
+    dn:hasVocabulary :propertiesWronglyDefined ;
+    void:properties "36"^^xsd:int .
+

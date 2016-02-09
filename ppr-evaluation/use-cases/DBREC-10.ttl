@@ -1,0 +1,37 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/DBREC/10#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+<http://purl.org/datanode/ex/0.2/DBREC/10#>
+    a foaf:Document ;
+    rdfs:comment "0) having a dataset with artists and links to resources using 767 properties >> access, Dataset, Artist, Link, Resource, 767, Property 1) identify useless property-value combinations because too generic >> identify, Useless, PropertyValue, Combination, Because, TooGeneric 2) identify useless properties because used to link only to a single artist. They are 336, 115 of them are wrongly written. >> identify, Useless, Property, Because, Usage, Link, Single, Artist" ;
+    rdfs:label "Furthermore, we identified 11 useless property-value  combinations to compute our recommendations, by being too generic such as rdf:type foaf:Agent.  Finally, from the 767 properties used to link any resource to an artist, 336 were removed as  used only to link to a single artist, and 115 were wrongly written." .
+
+:dset
+    dn:hasSection :useless, [
+        dn:disjointSection :useless
+    ] ;
+    void:properties "767"^^xsd:int .
+
+:linkToSingleArtist
+    dn:hasPortion [
+        void:entities "115"^^xsd:int ;
+        rdfs:comment "these properties are wrongly written"@en
+    ] ;
+    rdfs:comment "these properties link to a single artist"@en .
+
+:uselessOnlyOnce
+    dn:isSectionOf :useless ;
+    dn:relations :linkToSingleArtist ;
+    void:properties "336"^^xsd:int .
+
+:uselessTooGeneric
+    dn:disjointSection :uselessOnlyOnce ;
+    dn:isSectionOf :useless .
+

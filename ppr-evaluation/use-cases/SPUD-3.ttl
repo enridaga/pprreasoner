@@ -1,0 +1,31 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/SPUD/3#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbprop: <http://dbpedia.org/property/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+<http://purl.org/datanode/ex/0.2/SPUD/3#>
+    a foaf:Document ;
+    rdfs:comment "0) having data >> access, Data 1) identify data parts with privacy issues as private data >> identify, Data, Part, Privacy, Concern, Privacy 2) identify the features of the private data that is relevant for the task >> identify, Feature, Privacy, Relevance, Task 3) preserve the private data with the relevant feature >> preserve, Privacy, Relevance, Feature 4) use the relevant feature on behalf of the private data on a public setting >> use, Relevance, Feature, Stand-In, Environment, Setting, Public 5) use the private data on a protected setting >> use, Protected, Setting, Data, Privacy" ;
+    rdfs:label "vulnerability identification, data masking and anonymisation tools that enable data  publishers to protect their data from re-identification and sensitive information disclosure  attacks, prior to data publishing" .
+
+:database
+    a dn:Datanode .
+
+:privatePart
+    dn:isSectionOf :database .
+
+:published
+    dn:hasSection [
+        dn:disjointSection :privatePart
+    ], [
+        dn:isAnonymizedOf :privatePart
+    ] .
+
