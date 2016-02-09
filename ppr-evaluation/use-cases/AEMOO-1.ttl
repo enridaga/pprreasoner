@@ -22,7 +22,7 @@
 
 <http://purl.org/datanode/ex/0.2/AEMOO/1#>
     a foaf:Document ;
-    rdfs:label "AEMOO#1" .
+    rdfs:label "AEMOO/1" .
 
 :DBPedia
     void:sparqlEndpoint <http://dbpedia.org/sparql> .

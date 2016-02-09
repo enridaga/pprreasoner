@@ -1,6 +1,6 @@
--c 0 -r Prolog -k EVOLVED -d use-cases/eventmedia1 -q http://purl.org/datanode/ex/0.2/EventMedia/1#output
--c 1 -r Prolog -k EVOLVED -d use-cases/eventmedia1 -q http://purl.org/datanode/ex/0.2/EventMedia/1#output
--c 0 -r SPIN   -k EVOLVED -d use-cases/eventmedia1 -q http://purl.org/datanode/ex/0.2/EventMedia/1#output
--c 1 -r SPIN   -k EVOLVED -d use-cases/eventmedia1 -q http://purl.org/datanode/ex/0.2/EventMedia/1#output
+-c 0 -r Prolog -k EVOLVED -d use-cases/EventMedia-1 -q http://purl.org/datanode/ex/0.2/EventMedia/1#output
+-c 1 -r Prolog -k EVOLVED -d use-cases/EventMedia-1 -q http://purl.org/datanode/ex/0.2/EventMedia/1#output
+-c 0 -r SPIN   -k EVOLVED -d use-cases/EventMedia-1 -q http://purl.org/datanode/ex/0.2/EventMedia/1#output
+-c 1 -r SPIN   -k EVOLVED -d use-cases/EventMedia-1 -q http://purl.org/datanode/ex/0.2/EventMedia/1#output
 
 
