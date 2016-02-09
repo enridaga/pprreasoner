@@ -1,5 +1,0 @@
- -c 0 -r Prolog -k EVOLVED -d use-cases/aemoo1 -q "http://purl.org/datanode/ex/0.2/AEMOO/1#resourceSummary"
- -c 1 -r Prolog -k EVOLVED -d use-cases/aemoo1 -q "http://purl.org/datanode/ex/0.2/AEMOO/1#resourceSummary"
- -c 0 -r SPIN -k EVOLVED -d use-cases/aemoo1 -q "http://purl.org/datanode/ex/0.2/AEMOO/1#resourceSummary"
- -c 1 -r SPIN -k EVOLVED -d use-cases/aemoo1 -q "http://purl.org/datanode/ex/0.2/AEMOO/1#resourceSummary"
-
