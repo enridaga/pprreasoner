@@ -1,9 +1,14 @@
 package ppr.evaluation;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,24 +21,34 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import ppr.prolog.PrologReasoner;
 import ppr.prolog.Dataflow2Prolog;
+import ppr.prolog.PrologReasoner;
 import ppr.reasoner.PPRReasoner;
+import ppr.reasoner.PPRReasonerException;
 import ppr.reasoner.PPRReasonerListener;
 import ppr.spin.SPINReasoner;
 
 public class Experiment {
 
 	public enum Implementation {
-		Prolog, SPIN
+		Prolog, SPIN;
+		public String print() {
+			return StringUtils.rightPad(this.name(), 6);
+		}
 	}
 
 	public enum KBType {
-		ORIGINAL, EVOLVED
+		ORIGINAL, EVOLVED;
+		public String print() {
+			return StringUtils.rightPad(this.name(), 8);
+		}
 	}
 
 	public enum Rules {
-		FULL, COMPRESSED
+		FULL, COMPRESSED;
+		public String print() {
+			return StringUtils.rightPad(this.name(), 10);
+		}
 	}
 
 	private static class Cli {
@@ -46,7 +61,6 @@ public class Experiment {
 			options.addOption("h", "help", false, "Show this help.");
 			options.addOption("r", "reasoner", true, "Set the reasoner implementation.");
 			options.addOption("c", "compression", true, "Set the compression.");
-			options.addOption("a", "annotator", true, "Set the url of the spotlight annotator. Defaults to http://spotlight.dbpedia.org/rest/annotate.");
 			options.addOption("d", "dataflow", true,
 					"Set the dataflow file.");
 			options.addOption("s", "silent", false,
@@ -121,7 +135,7 @@ public class Experiment {
 			}
 
 			try {
-				ExperimentResult result = new Experiment().perform(r, c, k, d, q);
+				ExperimentResult result = new Experiment(r, c, k, d).perform(q);
 				E.println(resultString(result, s));
 			} catch (Exception e) {
 				E.println("Failed to execute experiment.");
@@ -132,21 +146,39 @@ public class Experiment {
 		public String resultString(ExperimentResult r, boolean s) {
 			StringBuilder sb = new StringBuilder().append(r.name())
 					.append("\t").append(r.totalDuration())
+					.append("\t").append(r.observations().setupTime())
 					.append("\t").append(r.observations().resourcesLoadTime())
 					.append("\t").append(r.observations().queryExecutionTime()).
 					append('\t').append(r.kbSize()).append('\t');
-			if(!s){
+			if (!s) {
 				sb.append(r.policies());
 			}
 			return sb.toString();
 		}
 	}
 
-	public ExperimentResult perform(Implementation rtype, Rules rulesType, KBType kbtype, final String dataflow, String... assets) throws Exception {
-		String dataflowFile = dataflow;
-		String datanode = "kb1/relations-c";
-		String datanodeNoHierarchy = "kb1/flat-relations-c";
-		String rules = "kb1/";
+	private Implementation rtype;
+	private Rules rulesType;
+	private Set<String> dataflows;
+	private KBType kbtype;
+	private PPRReasoner reasoner;
+	private long start;
+
+	public Experiment(Implementation rtype, Rules rulesType, KBType kbtype, String... dataflows) throws PPRReasonerException {
+		this.rtype = rtype;
+		this.rulesType = rulesType;
+		this.kbtype = kbtype;
+		this.dataflows = new HashSet<String>();
+		this.dataflows.addAll(Arrays.asList(dataflows));
+		setup();
+	}
+
+	private void setup() throws PPRReasonerException {
+		String kb = "kb2/";
+		// String dataflowFile = dataflow;
+		String datanode = kb + "datanode-compact-c";
+		String datanodeNoHierarchy = kb + "datanode-no-hierarchy-c";
+		String rules = kb;
 		switch (rulesType) {
 		case FULL:
 			rules += "full-rules-c";
@@ -168,21 +200,35 @@ public class Experiment {
 			break;
 		}
 
+		List<File> dataflowFiles = new ArrayList<File>();
+//		List<File> policiesFiles = new ArrayList<File>();
 		switch (rtype) {
 		case Prolog:
 			datanode += ".pl";
 			rules += ".pl";
-			if (!new File(dataflowFile + ".pl").exists() && new File(dataflowFile + ".ttl").exists()) {
-				// Generate pl file
-				Dataflow2Prolog.toProlog(new File(dataflowFile + ".ttl"), new File(dataflowFile + ".pl"));
+			datanodeNoHierarchy += ".pl";
+			for (String dataflowFile : dataflows) {
+				if (!new File(dataflowFile + ".pl").exists() && new File(dataflowFile + ".ttl").exists()) {
+					// Generate pl files
+					try {
+						Dataflow2Prolog.toProlog(new File(dataflowFile + ".ttl"), new File(dataflowFile + ".pl"));
+						Dataflow2Prolog.toProlog(new File(dataflowFile + ".policies.ttl"), new File(dataflowFile + ".policies.pl"));
+					} catch (IOException e) {
+						throw new PPRReasonerException(e);
+					}
+				}
+				dataflowFiles.add(new File(dataflowFile + ".pl"));
+				dataflowFiles.add(new File(dataflowFile + ".policies.pl"));
 			}
-			dataflowFile = dataflowFile + ".pl";
 			break;
 		case SPIN:
 			datanode += ".nt";
 			datanodeNoHierarchy += ".nt";
 			rules += ".nt";
-			dataflowFile += ".ttl";
+			for (String dataflowFile : dataflows) {
+				dataflowFiles.add(new File(dataflowFile + ".ttl"));
+				dataflowFiles.add(new File(dataflowFile + ".policies.ttl"));
+			}
 			break;
 		}
 		File[] files = null;
@@ -192,30 +238,33 @@ public class Experiment {
 			if (rtype == Implementation.SPIN) {
 				files = new File[] { new File(datanodeNoHierarchy), new File(rules) };
 			} else {
-				files = new File[] { new File(rules) };
+				files = new File[] { new File(datanodeNoHierarchy), new File(rules) };
 			}
 			break;
 		case COMPRESSED:
 			files = new File[] { new File(datanode), new File(rules) };
 			break;
 		}
-		long start = System.currentTimeMillis();
 
-		PPRReasoner reasoner = null;
+		// We start counting the global duration here.
+		start = System.currentTimeMillis();
+//		for(File d:files){
+//			System.out.println(d.getAbsolutePath());
+//		}
+
+		File[] f = (File[]) ArrayUtils.addAll(files, dataflowFiles.toArray());
 		switch (rtype) {
 		case Prolog:
-			File[] f = (File[]) ArrayUtils.addAll(files, new File[] { new File(dataflowFile) });
 			reasoner = PrologReasoner.createCustom(f);
 			((PrologReasoner) reasoner).init();
 			break;
 		case SPIN:
-			File[] f2 = (File[]) ArrayUtils.addAll(files, new File[] { new File(dataflowFile) });
-			 reasoner = SPINReasoner.createCustom(f2);
-//			SPINReasonerFactory fac = new SPINReasonerFactory(files);
-//			fac.setListener(listener);
-//			reasoner = fac.createReasoner(new File(dataflowFile));
+			reasoner = SPINReasoner.createCustom(f);
 			break;
 		}
+	}
+
+	public ExperimentResult perform(String... assets) throws Exception {
 
 		final Map<String, Set<String>> policies = new HashMap<String, Set<String>>();
 		for (String ass : assets) {
@@ -237,7 +286,7 @@ public class Experiment {
 
 			@Override
 			public String name() {
-				return StringUtils.join(new Object[] { dataflow, rtype, kbtype, rulesType }, "\t");
+				return StringUtils.join(new Object[] { dataflows, rtype.print(), kbtype.print(), rulesType.print() }, ' ');
 			}
 
 			@Override

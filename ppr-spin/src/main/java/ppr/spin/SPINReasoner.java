@@ -49,12 +49,6 @@ public class SPINReasoner implements PPRReasoner, PPRReasonerObservable {
 	private Model newTriples = null;
 	private OntModel data = null;
 
-	static {
-		reg = SPINModuleRegistry.get();
-		reg.init();
-
-	}
-
 	public SPINReasoner(File... ttlResources) throws PPRReasonerException {
 		resources = ttlResources;
 		setListener(new PPRReasonerListenerImpl());
@@ -76,8 +70,13 @@ public class SPINReasoner implements PPRReasoner, PPRReasonerObservable {
 	}
 
 	private void init() throws FileNotFoundException, PPRReasonerException {
-		listener.beforeResources();
+
+		listener.beforeSetup();
 		l.debug("Inizialising SPIN reasoner");
+		if(reg==null){
+			reg = SPINModuleRegistry.get();
+			reg.init();
+		}
 		Model baseModel = ModelFactory.createDefaultModel();
 		for (Object f : resources) {
 			l.debug(" ... loading {}", f);
@@ -109,7 +108,6 @@ public class SPINReasoner implements PPRReasoner, PPRReasonerObservable {
 		reasoner = ReasonerRegistry.getOWLMicroReasoner();
 		reasoner.bindSchema(ontModel);
 		SPINModuleRegistry.get().registerAll(ontModel, null);
-		listener.afterResources();
 		listener.setKBSize(ontModel.size());
 
 		data = JenaUtil.createOntologyModel(OntModelSpec.RDFS_MEM);
@@ -126,6 +124,7 @@ public class SPINReasoner implements PPRReasoner, PPRReasonerObservable {
 		// Phase 6: run the rule
 		InfModel infModel = ModelFactory.createInfModel(reasoner, data);
 		SPINInferences.run(infModel, newTriples, explain, null, false, null);
+		listener.afterSetup();
 	}
 
 	public void load(File is) throws PPRReasonerException {

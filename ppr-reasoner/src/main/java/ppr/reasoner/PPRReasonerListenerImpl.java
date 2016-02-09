@@ -1,16 +1,18 @@
 package ppr.reasoner;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class PPRReasonerListenerImpl implements PPRReasonerListener {
-	private long beforeResources;
-	private long afterResources;
 	private long beforeQuery;
 	private long afterQuery;
 	private Map<String, Long> beforeResource = new HashMap<String, Long>();
 	private Map<String, Long> afterResource = new HashMap<String, Long>();
 	private long kbsize;
+	private long beforeSetup;
+	private long afterSetup;
+
 	@Override
 	public void afterQuery() {
 		afterQuery = System.currentTimeMillis();
@@ -20,20 +22,12 @@ public class PPRReasonerListenerImpl implements PPRReasonerListener {
 		afterResource.put(file, System.currentTimeMillis());
 	};
 
-	public void afterResources() {
-		afterResources = System.currentTimeMillis();
-	};
-
 	public void beforeQuery() {
 		beforeQuery = System.currentTimeMillis();
 	};
 
 	public void beforeResource(String file) {
 		beforeResource.put(file, System.currentTimeMillis());
-	};
-
-	public void beforeResources() {
-		beforeResources = System.currentTimeMillis();
 	};
 
 	public long queryExecutionTime() {
@@ -45,7 +39,11 @@ public class PPRReasonerListenerImpl implements PPRReasonerListener {
 	};
 
 	public long resourcesLoadTime() {
-		return afterResources - beforeResources;
+		long time = 0;
+		for (Entry<String, Long> e : afterResource.entrySet()) {
+			time += (e.getValue() - beforeResource.get(e.getKey()));
+		}
+		return time;
 	}
 
 	public long getKBSize() {
@@ -55,4 +53,16 @@ public class PPRReasonerListenerImpl implements PPRReasonerListener {
 	public void setKBSize(long kbsize) {
 		this.kbsize = kbsize;
 	};
+
+	public void beforeSetup() {
+		this.beforeSetup = System.currentTimeMillis();
+	}
+
+	public void afterSetup() {
+		this.afterSetup = System.currentTimeMillis();
+	}
+
+	public long setupTime() {
+		return afterSetup - beforeSetup;
+	}
 }
