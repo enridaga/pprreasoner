@@ -1,4 +1,4 @@
-
+./ppr-evaluation/results
 .metadata
 bin/
 tmp/
@@ -48,3 +48,7 @@ local.properties
 
 # Code Recommenders
 .recommenders/
+
+# Maven projects
+target/
+
