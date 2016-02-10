@@ -19,8 +19,8 @@ import org.slf4j.LoggerFactory;
 
 import ppr.reasoner.PPRReasoner;
 import ppr.reasoner.PPRReasonerException;
-import ppr.reasoner.PPRReasonerListener;
-import ppr.reasoner.PPRReasonerListenerImpl;
+import ppr.reasoner.PPRReasonerObserver;
+import ppr.reasoner.PPRReasonerObserverImpl;
 import ppr.reasoner.PPRReasonerObservable;
 import ubc.cs.JLog.Foundation.iPrologFileServices;
 import ubc.cs.JLog.Foundation.jPrologAPI;
@@ -32,21 +32,21 @@ public class PrologReasoner implements PPRReasoner, PPRReasonerObservable {
 	iPrologFileServices fs = new jPrologFileServices();
 	private jPrologAPI prolog;
 	private boolean metaont = true;
-	private PPRReasonerListener listener = null;
+	private PPRReasonerObserver listener = null;
 
-	public void setListener(PPRReasonerListener listener) {
+	public void setListener(PPRReasonerObserver listener) {
 		this.listener = listener;
 	}
 
 	private PrologReasoner(File... sources) throws PPRReasonerException {
 		this.sources = sources;
-		setListener(new PPRReasonerListenerImpl());
+		setListener(new PPRReasonerObserverImpl());
 	}
 
 	private PrologReasoner(boolean metaont, File... sources) throws IOException {
 		this.metaont = false;
 		this.sources = sources;
-		setListener(new PPRReasonerListenerImpl());
+		setListener(new PPRReasonerObserverImpl());
 	}
 
 	public void load(File f) throws PPRReasonerException {
@@ -86,7 +86,7 @@ public class PrologReasoner implements PPRReasoner, PPRReasonerObservable {
 	}
 
 	@Override
-	public PPRReasonerListener observer() {
+	public PPRReasonerObserver observer() {
 		return listener;
 	}
 

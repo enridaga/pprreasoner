@@ -1,5 +1,5 @@
 package ppr.reasoner;
 
 public interface PPRReasonerObservable {
-	public void setListener( PPRReasonerListener listener);
+	public void setListener( PPRReasonerObserver listener);
 }

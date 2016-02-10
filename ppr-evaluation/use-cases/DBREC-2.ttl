@@ -1,3 +1,8 @@
+# output
+# DBPedia
+# datatype-properties
+# part-with-dtp
+# part-without-dtp
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix : <http://purl.org/datanode/ex/0.2/DBREC/2#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -10,28 +15,29 @@
 
 <http://purl.org/datanode/ex/0.2/DBREC/2#>
     a foaf:Document ;
-    rdfs:comment "0) having data_1 with 39,000 resources and 3,004,351 triples >> access, Data, 39000, Resource, 3004351, Triple 1) remove datatype properties because they are not relevant >> remove, DatatypeProperty, Irrelevant 2) having data_2 with 2,247,019 triples >> access, 2247019, Triple 3) data_2 is a portion of data_1 >> Data, Portion 4) data_2 is 25.2% smaller then data_1 >> Data, 25.2%, Small, SmallerThen" ;
-    rdfs:label "for two main reasons. On the one hand, we wanted to remove datatype properties,  as they are not relevant for our experiment6. Removing them lead to a dataset containing  2,247,019 triples, thus reducing the original one from about 25.2% — implying that 1/4 of  DBpedia assertions, in our dataset, involve literals. " .
+    rdfs:label "DBREC/2" ;
+	skos:note "for two main reasons. On the one hand, we wanted to remove datatype properties,  as they are not relevant for our experiment6. Removing them lead to a dataset containing  2,247,019 triples, thus reducing the original one from about 25.2% — implying that 1/4 of  DBpedia assertions, in our dataset, involve literals. " 
+	.
 
 :datatype-properties
-    dn:attributesOf :origin .
+    dn:attributesOf :DBPedia .
 
-:no-dtp
-    dn:cleanedFrom :origin ;
+:output
+    dn:cleanedFrom :DBPedia ;
     dn:isCopyOf :part-without-dtp ;
     void:triples "2247019"^^xsd:int .
 
-:origin
+:DBPedia
     void:entities "39000"^^xsd:int ;
     void:triples "3004351"^^xsd:int .
 
 :part-with-dtp
     dn:hasVocabulary :datatype-properties ;
-    dn:isSectionOf :origin ;
+    dn:isSectionOf :DBPedia ;
     rdfs:comment "part of the source with datatype properties"@en .
 
 :part-without-dtp
     dn:differentVocabulary :part-with-dtp ;
     dn:disjointSection :part-with-dtp ;
-    dn:isSectionOf :origin .
+    dn:isSectionOf :DBPedia .
 

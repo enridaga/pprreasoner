@@ -1,3 +1,8 @@
+# output
+# with-wrong-properties
+# dset
+# DBPedia
+# wrong-properties
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix : <http://purl.org/datanode/ex/0.2/DBREC/8#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -10,11 +15,13 @@
 
 <http://purl.org/datanode/ex/0.2/DBREC/8#>
     a foaf:Document ;
-    rdfs:comment "0) having a dataset which is a subset of dbpedia >> access, Dataset, Subset, Dbpedia 1) identify properties wrongly defined (lost data? meaningless data?) >> identify, Property, Wrong, Lost, Meaningless" ;
-    rdfs:label "Moreover, we identified 35 properties that were wrongly defined — while however used two times of less —,  such as http://dbpedia.org/property/extra18 and http://dbpedia.org/property/klfsgProperty. " .
+    rdfs:label "DBREC/8" ;
+    skos:note  "Moreover, we identified 35 properties that were wrongly defined — while however used two times of less —,  such as http://dbpedia.org/property/extra18 and http://dbpedia.org/property/klfsgProperty. " .
 
 :dset
     dn:isSectionOf :DBPedia .
+
+:output dn:isCopyOf :with-wrong-properties .
 
 :with-wrong-properties
     dn:inconsistentWith :with-wrong-properties ;

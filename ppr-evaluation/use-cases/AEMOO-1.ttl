@@ -22,7 +22,9 @@
 
 <http://purl.org/datanode/ex/0.2/AEMOO/1#>
     a foaf:Document ;
-    rdfs:label "AEMOO/1" .
+    rdfs:label "AEMOO/1" ;
+	skos:note """Aemoo results are highly contextualized. The context is given by an EKP, determined based on the resource type. [...] Its input is an entity URI, e.g. dbpedia:Barack Obama. Its output is an RDF graph corresponding to the summarization provided by the entity’s EKP  (selected based on the entity type). The RDF graph is obtained by generating a SPARQL CONSTRUCT out of the selected EKP.  EKPs are available as OWL ontologies, and there are currently around 200 EKPs that have been extracted from DBpedia and the Wikipedia linking structure."""
+	.
 
 :DBPedia
     void:sparqlEndpoint <http://dbpedia.org/sparql> .

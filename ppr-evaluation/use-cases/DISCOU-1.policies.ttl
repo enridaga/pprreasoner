@@ -1,0 +1,31 @@
+# similarResources
+# dset
+# Resource
+# Topic
+# hasTopic
+# hasTopicVoc
+# myResource
+# myResourceTopics
+# topics
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://purl.org/datanode/ex/0.2/DISCOU/1#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dbpedia: <http://dbpedia.org/resource/> .
+@prefix dn: <http://purl.org/datanode/ns/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dbprop: <http://dbpedia.org/property/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix ldr: <http://purl.oclc.org/NET/ldr/ns#> .
+
+[] a odrl:Set ;
+	odrl:asset :dset ;
+	odrl:permission odrl:read, odrl:copy, odrl:modify, cc:Distribution, odrl:display ;
+	odrl:prohibition odrl:license, odrl:modify
+	.

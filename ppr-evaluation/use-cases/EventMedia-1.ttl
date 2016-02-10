@@ -31,7 +31,8 @@
 
 <http://purl.org/datanode/ex/0.2/EventMedia/1#>
     a foaf:Document ;
-     rdfs:label "EventMedia/1" 
+     rdfs:label "EventMedia/1" ;
+	 skos:note """(Reference http://eventmedia.eurecom.fr/) is obtained from three public event directories (Last.fm, Eventful, Upcoming) and from one large media directory (Flickr). It encapsulates media and events descriptions, enriched with background knowledge from external datasets such as DBpedia, MusicBrainz, BBC and Foursquare. The dataset used the LODE ontology and consists of more than 30 millions RDF triples. [...] The data retrieved is de-serialized and exported into a common schema providing descriptions of events, venues, agents, attendees and photos."""
 	 .
 :collection
     dn:hasPortion [

@@ -20,8 +20,8 @@ import org.topbraid.spin.vocabulary.SPIN;
 
 import ppr.reasoner.PPRReasoner;
 import ppr.reasoner.PPRReasonerException;
-import ppr.reasoner.PPRReasonerListener;
-import ppr.reasoner.PPRReasonerListenerImpl;
+import ppr.reasoner.PPRReasonerObserver;
+import ppr.reasoner.PPRReasonerObserverImpl;
 import ppr.reasoner.PPRReasonerObservable;
 
 import com.hp.hpl.jena.ontology.OntModel;
@@ -42,7 +42,7 @@ public class SPINReasoner implements PPRReasoner, PPRReasonerObservable {
 	private static SPINModuleRegistry reg;
 	private OntModel ontModel;
 	private static final Logger l = LoggerFactory.getLogger(SPINReasoner.class);
-	private PPRReasonerListener listener = null;
+	private PPRReasonerObserver listener = null;
 	private Object[] resources;
 	final SPINExplanations explain = new SPINExplanations();
 	private Reasoner reasoner;
@@ -51,7 +51,7 @@ public class SPINReasoner implements PPRReasoner, PPRReasonerObservable {
 
 	public SPINReasoner(File... ttlResources) throws PPRReasonerException {
 		resources = ttlResources;
-		setListener(new PPRReasonerListenerImpl());
+		setListener(new PPRReasonerObserverImpl());
 		try {
 			init();
 		} catch (FileNotFoundException e) {
@@ -61,7 +61,7 @@ public class SPINReasoner implements PPRReasoner, PPRReasonerObservable {
 
 	public SPINReasoner(InputStream... ttlResources) throws PPRReasonerException {
 		resources = ttlResources;
-		setListener(new PPRReasonerListenerImpl());
+		setListener(new PPRReasonerObserverImpl());
 		try {
 			init();
 		} catch (FileNotFoundException e) {
@@ -145,7 +145,7 @@ public class SPINReasoner implements PPRReasoner, PPRReasonerObservable {
 	}
 
 	@Override
-	public PPRReasonerListener observer() {
+	public PPRReasonerObserver observer() {
 		return listener;
 	}
 
@@ -202,7 +202,7 @@ public class SPINReasoner implements PPRReasoner, PPRReasonerObservable {
 	}
 
 	@Override
-	public void setListener(PPRReasonerListener listener) {
+	public void setListener(PPRReasonerObserver listener) {
 		this.listener = listener;
 	}
 

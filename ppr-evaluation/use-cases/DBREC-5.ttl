@@ -1,3 +1,12 @@
+# output
+# optimized
+# DBPedia
+# direct-links
+# artists-links
+# direct-relations
+# relations
+# indirect-links
+# indirect-relations
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix : <http://purl.org/datanode/ex/0.2/DBREC/5#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -10,8 +19,8 @@
 
 <http://purl.org/datanode/ex/0.2/DBREC/5#>
     a foaf:Document ;
-    rdfs:comment "0) optimize the dataset for the task >> optimize, Dataset, Task 1) identify the distinct properties used to link artists directly >> identify, Distinct, Property, Link, Artist, Direct 2) there are 578 distinct properties that link artists directly >> 578, Distinct, Property, Link, Direct 3) identify the distinct properties used to link artists to any other resource >> identify, Distinct, Property, Link, Artist, Resource, AnyOther 4) 767 distinct properties are used to link artists to any other resource >> 767, Distinct, Property, Link, Artist, AnyOther, Resource" ;
-    rdfs:label "We then focused on further optimisations not at the query-engine level, but at the dataset level,  analysing it more deeply, and we identified that: (1) 188 distinct properties are used to link artists  together directly; (2) 578 distinct properties are used to link an artist to any resource (including artists) ; (3) 767 distinct properties are used to link any resource (including artists) to an artist. " .
+    rdfs:label "DBREC/5" ;
+    skos:note "We then focused on further optimisations not at the query-engine level, but at the dataset level,  analysing it more deeply, and we identified that: (1) 188 distinct properties are used to link artists  together directly; (2) 578 distinct properties are used to link an artist to any resource (including artists) ; (3) 767 distinct properties are used to link any resource (including artists) to an artist. " .
 
 :DBPedia
     a dn:Datanode .
@@ -47,3 +56,4 @@
 :relations
     dn:relationsOf :artists .
 
+:output dn:isCopyOf :optimized .

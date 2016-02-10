@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 function errcho {
     >&2 echo "$@"
 }
@@ -9,22 +10,25 @@ function experiment {
 
 function monitor {
         sleep 0.1
-        errcho "Monitoring $1"
-	process=$1 #$(ps -a -o pid,command|sed 1d|grep java|grep experiment|cut -d " " -f 1)
+	process=$(pgrep -P $1)      #$1 #$(ps -a -o pid,command|sed 1d|grep java|grep experiment|cut -d " " -f 1)
+        MS=$2
+	errcho "Monitoring $process (will interrupt in $MS seconds)"
+	trap "kill $process $1" EXIT
 	if [ ! -z "$process" ]
 	then
+	  SECONDS=0
 	  while kill -0 $process 2> /dev/null; do
+		[ "$SECONDS" -gt "$MS" ] && break || errcho -n "."
 		ps -p $process -o pid,%cpu,%mem,vsz,rss|sed 1d
-		errcho -n "."
-		sleep 0.1
+		sleep 0.5
 	  done
-	  errcho " Done."
+	  [ "$SECONDS" -gt "$MS" ] && kill $process && errcho " Interrupted." || errcho " Done."
 	fi
 }
 
 suite=${1:-./suites/full.txt}
 times=${2:-1}
-
+interrupt=${3:-300} # almost 5 minutes
 result=results/$(basename "$suite")
 rm $result 2> /dev/null
 rm -f $result.monitor.* 2> /dev/null
@@ -42,10 +46,9 @@ do
     exec 1<>$result.monitor.$count.$a
     errcho "$count $a - $args"
     echo "#$count #$a - $args"
-    #./experiment.sh $args >> $result & 
     experiment $args >> $result &
     pro=$!
-    monitor $pro
+    monitor $pro $interrupt
   done
   fi
 done < "$suite"

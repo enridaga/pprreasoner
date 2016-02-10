@@ -1,7 +1,7 @@
 package ppr.reasoner;
 
 
-public interface PPRReasonerListener {
+public interface PPRReasonerObserver {
 
 	public void beforeResource(String file);
 	public void afterResource(String file);

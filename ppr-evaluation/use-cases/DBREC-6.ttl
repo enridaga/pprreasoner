@@ -1,3 +1,9 @@
+# output
+# curated
+# origin
+# DBPedia
+# uselessPropertyValues
+# usefulPropertyValues
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix : <http://purl.org/datanode/ex/0.2/DBREC/6#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -10,8 +16,10 @@
 
 <http://purl.org/datanode/ex/0.2/DBREC/6#>
     a foaf:Document ;
-    rdfs:comment "0) cure the data for the task >> cure, Data, Task 1) remove properties and property-values that are useless for computing LDSD measures >> remove, Property, PropertyValue, Useless, compute, LDSD, Measure, LDSDMeasure 2) solve some data quality issues >> solve, Data, Quality, Issue" ;
-    rdfs:label "We then focused on data curation: (1) on the one hand to remove properties and property-values   that are useless for computing the LDSD measures, and (2) on the other hand, to solve some data quality issues in DBpedia." .
+    rdfs:label "DBREC/6" ;
+    skos:note  "We then focused on data curation: (1) on the one hand to remove properties and property-values   that are useless for computing the LDSD measures, and (2) on the other hand, to solve some data quality issues in DBpedia." .
+
+:output dn:isCopyOf :curated .
 
 :curated
     dn:cleanedFrom :origin ;

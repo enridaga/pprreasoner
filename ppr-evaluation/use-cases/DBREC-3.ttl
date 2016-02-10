@@ -1,3 +1,9 @@
+# output
+# DBPedia
+# obtained
+# origin
+# redundant
+# inconsistent
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix : <http://purl.org/datanode/ex/0.2/DBREC/3#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -10,10 +16,11 @@
 
 <http://purl.org/datanode/ex/0.2/DBREC/3#>
     a foaf:Document ;
-    rdfs:comment "0) having data with redundancies and inconsistencies >> access, Data, Redundancy, Inconsistency 1) remove redundancies >> remove, Redundancy 2) remove inconsistencies >> remove, Inconsistency 3) remove duplicates (same as redundancies?) >> remove, Duplicate 4) data is now 55.7 percent of before >> Data, Now, Before" ;
-    rdfs:label "On the other hand, we identified  lots of redundancy and inconsistencies in our DBpedia subset7. Especially, many links  between resources are defined redundantly as http://dbpedia.org/ontology/xxx and at the  same time as http://dbpedia.org/property/xxx. We then removed duplicates, leading to  1,675,711 triples, i.e. only 55.7% of the original dataset." .
+    rdfs:label "DBREC/3" ;
+	skos:note "On the other hand, we identified  lots of redundancy and inconsistencies in our DBpedia subset7. Especially, many links  between resources are defined redundantly as http://dbpedia.org/ontology/xxx and at the  same time as http://dbpedia.org/property/xxx. We then removed duplicates, leading to  1,675,711 triples, i.e. only 55.7% of the original dataset." 
+	.
 
-:good
+:output
     dn:disjointPart [
         dn:hasPart :inconsistent, :redundant
     ] ;

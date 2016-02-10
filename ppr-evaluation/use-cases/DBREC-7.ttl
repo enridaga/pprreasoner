@@ -1,3 +1,11 @@
+# output
+# misusedProperties
+# origin
+# DBPedia
+# withProperties
+# Artist
+# withMisusedProperties
+# properties
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix : <http://purl.org/datanode/ex/0.2/DBREC/7#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -12,11 +20,13 @@
 
 <http://purl.org/datanode/ex/0.2/DBREC/7#>
     a foaf:Document ;
-    rdfs:comment "0) having a dataset of artists and links between artists and things >> access, Dataset, Artist, Link, Thing 1) identify misused properties >> identify, Misuse, Property 2) 188 properties misused >> 188, Property, Misuse 3) the property dbprop:notableInstruments is misused in the dataset when/because it connects two artists >> Property, dbprop:notableInstruments, Misuse, Dataset, When, Link, Artist 4) the property dbprop:nationalAnthem is misused in the dataset when/because it connects a country to an artist >> Property, dbprop:nationalAnthem, Misuse, Dataset, When, Link, Country, Artist" ;
-    rdfs:label "From the 188 properties linking two artists, we identified that 18 were used as links between  artists while it was not their main purpose8, such as the property dbprop:notableInstruments —  used to link an artist to its instrument(s) — or dbprop:nationalAnthem — linking a country to its anthem. " .
+    rdfs:label "DBREC/7" ;
+    skos:note  "From the 188 properties linking two artists, we identified that 18 were used as links between  artists while it was not their main purpose8, such as the property dbprop:notableInstruments —  used to link an artist to its instrument(s) — or dbprop:nationalAnthem — linking a country to its anthem. " .
 
 :misusedProperties
     dn:isPortionOf :properties .
+
+:origin dn:isPortionOf :DBPedia .
 
 :origin
     dn:hasSection :withProperties, [
@@ -26,6 +36,8 @@
         ] ;
         void:classPartition :Artist
     ] .
+
+:output dn:isCopyOf :withMisusedProperties .
 
 :withMisusedProperties
     dn:isSectionOf :withProperties ;

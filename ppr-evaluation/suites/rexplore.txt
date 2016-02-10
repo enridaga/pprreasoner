@@ -1,0 +1,8 @@
+-c 0 -r Prolog -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-1 -q http://purl.org/datanode/ex/0.2/REXPLORE/1#output
+-c 1 -r Prolog -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-1 -q http://purl.org/datanode/ex/0.2/REXPLORE/1#output
+-c 0 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-1 -q http://purl.org/datanode/ex/0.2/REXPLORE/1#output
+-c 1 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-1 -q http://purl.org/datanode/ex/0.2/REXPLORE/1#output
+-c 0 -r Prolog -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-2 -q http://purl.org/datanode/ex/0.2/REXPLORE/2#output
+-c 1 -r Prolog -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-2 -q http://purl.org/datanode/ex/0.2/REXPLORE/2#output
+-c 0 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-2 -q http://purl.org/datanode/ex/0.2/REXPLORE/2#output
+-c 1 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-2 -q http://purl.org/datanode/ex/0.2/REXPLORE/2#output

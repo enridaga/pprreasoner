@@ -25,7 +25,7 @@ import ppr.prolog.Dataflow2Prolog;
 import ppr.prolog.PrologReasoner;
 import ppr.reasoner.PPRReasoner;
 import ppr.reasoner.PPRReasonerException;
-import ppr.reasoner.PPRReasonerListener;
+import ppr.reasoner.PPRReasonerObserver;
 import ppr.spin.SPINReasoner;
 
 public class Experiment {
@@ -133,16 +133,34 @@ public class Experiment {
 				help();
 				return;
 			}
-
 			try {
-				ExperimentResult result = new Experiment(r, c, k, d).perform(q);
+				Experiment experiment = new Experiment(r, c, k, d);
+				ShutdownThread t = new ShutdownThread(experiment);
+				Runtime.getRuntime().addShutdownHook(t);
+				ExperimentResult result = experiment.perform(q);
+				t.completed();
 				E.println(resultString(result, s));
 			} catch (Exception e) {
 				E.println("Failed to execute experiment.");
 				e.printStackTrace();
 			}
 		}
-
+		class ShutdownThread extends Thread{
+			private boolean completed = false;
+			private Experiment experiment;
+			public ShutdownThread(Experiment experiment) {
+				this.experiment = experiment;
+			}
+			public synchronized void completed(){
+				this.completed = true;
+			}
+			@Override
+			public void run() {
+				if(!this.completed){
+					E.println(interruptedResultString(experiment));
+				}
+			}
+		}
 		public String resultString(ExperimentResult r, boolean s) {
 			StringBuilder sb = new StringBuilder().append(r.name())
 					.append("\t").append(r.totalDuration())
@@ -153,6 +171,16 @@ public class Experiment {
 			if (!s) {
 				sb.append(r.policies());
 			}
+			return sb.toString();
+		}
+
+		public String interruptedResultString(Experiment e) {
+			StringBuilder sb = new StringBuilder().append(e.getName())
+					.append("\t").append(System.currentTimeMillis()-e.getStartTime())
+					.append("\t").append(e.getReasoner().observer().setupTime())
+					.append("\t").append(e.getReasoner().observer().resourcesLoadTime())
+					.append("\t").append(e.getReasoner().observer().queryExecutionTime()).
+					append('\t').append(e.getReasoner().observer().getKBSize()).append('\t').append("Interrupted.");
 			return sb.toString();
 		}
 	}
@@ -173,6 +201,17 @@ public class Experiment {
 		setup();
 	}
 
+	public Implementation getImplementation() {
+		return rtype;
+	}
+
+	public PPRReasoner getReasoner(){
+		return reasoner;
+	}
+
+	public long getStartTime(){
+		return start;
+	}
 	private void setup() throws PPRReasonerException {
 		String kb = "kb2/";
 		// String dataflowFile = dataflow;
@@ -201,7 +240,7 @@ public class Experiment {
 		}
 
 		List<File> dataflowFiles = new ArrayList<File>();
-//		List<File> policiesFiles = new ArrayList<File>();
+		// List<File> policiesFiles = new ArrayList<File>();
 		switch (rtype) {
 		case Prolog:
 			datanode += ".pl";
@@ -248,9 +287,9 @@ public class Experiment {
 
 		// We start counting the global duration here.
 		start = System.currentTimeMillis();
-//		for(File d:files){
-//			System.out.println(d.getAbsolutePath());
-//		}
+		// for(File d:files){
+		// System.out.println(d.getAbsolutePath());
+		// }
 
 		File[] f = (File[]) ArrayUtils.addAll(files, dataflowFiles.toArray());
 		switch (rtype) {
@@ -264,6 +303,10 @@ public class Experiment {
 		}
 	}
 
+	public String getName() {
+		return StringUtils.join(new Object[] { dataflows, rtype.print(), kbtype.print(), rulesType.print() }, ' ');
+	}
+
 	public ExperimentResult perform(String... assets) throws Exception {
 
 		final Map<String, Set<String>> policies = new HashMap<String, Set<String>>();
@@ -271,7 +314,7 @@ public class Experiment {
 			Set<String> pol = reasoner.policies(ass);
 			policies.put(ass, pol);
 		}
-		final PPRReasonerListener listener = reasoner.observer();
+		final PPRReasonerObserver listener = reasoner.observer();
 		final long total = System.currentTimeMillis() - start;
 		return new ExperimentResult() {
 
@@ -286,11 +329,11 @@ public class Experiment {
 
 			@Override
 			public String name() {
-				return StringUtils.join(new Object[] { dataflows, rtype.print(), kbtype.print(), rulesType.print() }, ' ');
+				return getName();
 			}
 
 			@Override
-			public PPRReasonerListener observations() {
+			public PPRReasonerObserver observations() {
 				return listener;
 			}
 

@@ -1,3 +1,14 @@
+# output
+# knowledgeBase
+# backgroundKnowledge
+# corpusOfPublications
+# geographicInformation
+# DBPedia
+# GeoNames
+# DBLP
+# ontology
+# topicsSet
+# semanticRelations
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix : <http://purl.org/datanode/ex/0.2/REXPLORE/1#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -10,18 +21,22 @@
 
 <http://purl.org/datanode/ex/0.2/REXPLORE/1#>
     a foaf:Document ;
-    rdfs:comment "0) Rexplore Ontology is automatically populated 1) The Ontology includes Topics with a number of semantic relationships 2) The KnowledgeBase is generated using a combination of statistical methods and background knowledge 3) Background knowledge includes a corpus of publications 4) The Knowledge Base is augmented with geographic information" ;
-    rdfs:label "Rexplore (uses) a fine-grained,  automatically populated topic ontology, in which topics are identified and structured according to a number of semantic relationships.  The resulting knowledge base is generated using a combination of statistical methods and background knowledge on the basis of a large-scale  corpus of publications [...] and is then augmented with geographic information [...] . " .
+   rdfs:label "REXPLORE/1" ;
+   skos:note "Rexplore (uses) a fine-grained,  automatically populated topic ontology, in which topics are identified and structured according to a number of semantic relationships.  The resulting knowledge base is generated using a combination of statistical methods and background knowledge on the basis of a large-scale  corpus of publications [...] and is then augmented with geographic information [...] . " .
 
 :backgroundKnowledge
-    dn:hasPart :corpusOfPublications .
+    dn:hasPart :corpusOfPublications ;
+	dn:hasPart :geographicInformation ;
+	dn:hasPart [ dn:isExtractionOf :DBPedia ]
+	.
+
+:corpusOfPublications dn:hasPart [ dn:isExtractionOf :DBLP ] .
 
 :geographicInformation
-    dn:isExtractionOf :backgroundKnowledge .
+    dn:isExtractionOf :GeoNames .
 
 :knowledgeBase
-    dn:combinationFrom :backgroundKnowledge, :statisticsResults ;
-    dn:hasPart :geographicInformation .
+    dn:combinationFrom :backgroundKnowledge, :statisticsResults .
 
 :ontology
     dn:describes :topicsSet ;
@@ -31,3 +46,4 @@
 :statisticsResults
     dn:isStatisticOf :backgroundKnowledge .
 
+:output dn:isSelectionOf :knowledgeBase .

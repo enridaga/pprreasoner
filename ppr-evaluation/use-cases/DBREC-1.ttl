@@ -1,3 +1,5 @@
+# output
+# DBPedia
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix : <http://purl.org/datanode/ex/0.2/DBREC/1#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -10,14 +12,14 @@
 
 <http://purl.org/datanode/ex/0.2/DBREC/1#>
     a foaf:Document ;
-    rdfs:comment "0) having data with 39,000 resources and 3,004,351 triples >> access, Data, 39000, Resource, 3004351, Triple 1) clean it to make it smaller and accurate >> clean, reduce, cure" ;
-    rdfs:label "The original dataset, including more than 39,000 resources,  included 3,004,351 triples. We then cleaned it to get a smaller and more accurate dataset, " .
+	rdfs:label "DBREC-1" ;
+    skos:note "The original dataset, including more than 39,000 resources,  included 3,004,351 triples. We then cleaned it to get a smaller and more accurate dataset, " .
 
-:accurate
-    dn:cleanedFrom :origin ;
-    dn:optimizedFrom :origin .
+:output
+    dn:cleanedFrom :DBPedia ;
+    dn:optimizedFrom :DBPedia .
 
-:origin
+:DBPedia
     void:subjects "39000"^^xsd:int ;
     void:triples "3004351"^^xsd:int .
 
