@@ -1,0 +1,10 @@
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/6#curated','http://purl.org/datanode/ex/0.2/DBREC/6#origin','http://purl.org/datanode/ns/updatedVersionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/6#curated','http://purl.org/datanode/ex/0.2/DBREC/6#usefulPropertyValues','http://purl.org/datanode/ns/sameCapability') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/6#curated','http://purl.org/datanode/ex/0.2/DBREC/6#origin','http://purl.org/datanode/ns/optimizedFrom') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/6#curated','http://purl.org/datanode/ex/0.2/DBREC/6#uselessPropertyValues','http://purl.org/datanode/ns/hasDeletion') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/6#curated','http://purl.org/datanode/ex/0.2/DBREC/6#origin','http://purl.org/datanode/ns/cleanedFrom') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/6#uselessPropertyValues','http://purl.org/datanode/ex/0.2/DBREC/6#usefulPropertyValues','http://purl.org/datanode/ns/disjointSection') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/6#uselessPropertyValues','http://purl.org/datanode/ex/0.2/DBREC/6#usefulPropertyValues','http://purl.org/datanode/ns/differentCapability') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/6#output','http://purl.org/datanode/ex/0.2/DBREC/6#curated','http://purl.org/datanode/ns/isCopyOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/6#usefulPropertyValues','http://purl.org/datanode/ex/0.2/DBREC/6#origin','http://purl.org/datanode/ns/isSectionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/6#origin','http://purl.org/datanode/ex/0.2/DBREC/6#DBPedia','http://purl.org/datanode/ns/isPortionOf') . 

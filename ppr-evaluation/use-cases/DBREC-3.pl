@@ -1,0 +1,12 @@
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/3#obtained','http://purl.org/datanode/ex/0.2/DBREC/3#good','http://purl.org/datanode/ns/isCopyOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/3#obtained','http://purl.org/datanode/ex/0.2/DBREC/3#DBPedia','http://purl.org/datanode/ns/cleanedFrom') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/3#output','http://purl.org/datanode/ex/0.2/DBREC/3#redundant','http://purl.org/datanode/ns/overlappingCapability') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/3#output','http://purl.org/datanode/ex/0.2/DBREC/3#origin','http://purl.org/datanode/ns/isPartOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/3#output','http://purl.org/datanode/ex/0.2/DBREC/3#redundant','http://purl.org/datanode/ns/inconsistentWith') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/3#output','http://purl.org/datanode/ex/0.2/DBREC/3#inconsistent','http://purl.org/datanode/ns/inconsistentWith') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/3#output','ba6083889dd81cb2b63d58ba92b57295','http://purl.org/datanode/ns/disjointPart') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/3#origin','http://purl.org/datanode/ex/0.2/DBREC/3#DBPedia','http://purl.org/datanode/ns/isPartOf') . 
+has_relation('ba6083889dd81cb2b63d58ba92b57295','http://purl.org/datanode/ex/0.2/DBREC/3#redundant','http://purl.org/datanode/ns/hasPart') . 
+has_relation('ba6083889dd81cb2b63d58ba92b57295','http://purl.org/datanode/ex/0.2/DBREC/3#inconsistent','http://purl.org/datanode/ns/hasPart') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/3#inconsistent','http://purl.org/datanode/ex/0.2/DBREC/3#origin','http://purl.org/datanode/ns/isPartOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/3#redundant','http://purl.org/datanode/ex/0.2/DBREC/3#origin','http://purl.org/datanode/ns/isPartOf') . 

@@ -1,0 +1,14 @@
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#artists-links','http://purl.org/datanode/ex/0.2/DBREC/4#artists','http://purl.org/datanode/ns/isSectionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#link-stats','http://purl.org/datanode/ex/0.2/DBREC/4#artists','http://purl.org/datanode/ns/samePopulation') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#link-stats','http://purl.org/datanode/ex/0.2/DBREC/4#artists','http://purl.org/datanode/ns/isStatisticOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#indirect-links','http://purl.org/datanode/ex/0.2/DBREC/4#artists-links','http://purl.org/datanode/ns/isInferenceOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#artists-with-14-links','http://purl.org/datanode/ex/0.2/DBREC/4#artists-links','http://purl.org/datanode/ns/isPortionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#artists-with-three-links','http://purl.org/datanode/ex/0.2/DBREC/4#link-stats','http://purl.org/datanode/ns/isSelectionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#artists-with-three-links','http://purl.org/datanode/ex/0.2/DBREC/4#artists-links','http://purl.org/datanode/ns/isPortionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#artists-with-three-links','http://purl.org/datanode/ex/0.2/DBREC/4#link-stats','http://purl.org/datanode/ns/isInferenceOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#artists-with-no-link','http://purl.org/datanode/ex/0.2/DBREC/4#link-stats','http://purl.org/datanode/ns/isSelectionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#artists-with-no-link','http://purl.org/datanode/ex/0.2/DBREC/4#artists','http://purl.org/datanode/ns/isPortionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#artists-with-no-link','http://purl.org/datanode/ex/0.2/DBREC/4#link-stats','http://purl.org/datanode/ns/isInferenceOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#artists-with-no-link','http://purl.org/datanode/ex/0.2/DBREC/4#artists-links','http://purl.org/datanode/ns/disjointPortion') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#artists','http://purl.org/datanode/ex/0.2/DBREC/4#DBPedia','http://purl.org/datanode/ns/isSelectionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/4#output','http://purl.org/datanode/ex/0.2/DBREC/4#indirect-links','http://purl.org/datanode/ns/isCopyOf') . 

@@ -1,0 +1,14 @@
+has_relation('http://purl.org/datanode/ex/0.2/REXPLORE/1#ontology','http://purl.org/datanode/ex/0.2/REXPLORE/1#knowledgeBase','http://purl.org/datanode/ns/isPartOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/REXPLORE/1#ontology','http://purl.org/datanode/ex/0.2/REXPLORE/1#semanticRelations','http://purl.org/datanode/ns/hasRelations') . 
+has_relation('http://purl.org/datanode/ex/0.2/REXPLORE/1#ontology','http://purl.org/datanode/ex/0.2/REXPLORE/1#topicsSet','http://purl.org/datanode/ns/describes') . 
+has_relation('http://purl.org/datanode/ex/0.2/REXPLORE/1#geographicInformation','http://purl.org/datanode/ex/0.2/REXPLORE/1#GeoNames','http://purl.org/datanode/ns/isExtractionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/REXPLORE/1#corpusOfPublications','49348b28dd9d3b681ec6a77bb7271bbd','http://purl.org/datanode/ns/hasPart') . 
+has_relation('2899bdd6a6d8219dcb002a54c22107c9','http://purl.org/datanode/ex/0.2/REXPLORE/1#DBPedia','http://purl.org/datanode/ns/isExtractionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/REXPLORE/1#statisticsResults','http://purl.org/datanode/ex/0.2/REXPLORE/1#backgroundKnowledge','http://purl.org/datanode/ns/isStatisticOf') . 
+has_relation('49348b28dd9d3b681ec6a77bb7271bbd','http://purl.org/datanode/ex/0.2/REXPLORE/1#DBLP','http://purl.org/datanode/ns/isExtractionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/REXPLORE/1#knowledgeBase','http://purl.org/datanode/ex/0.2/REXPLORE/1#statisticsResults','http://purl.org/datanode/ns/combinationFrom') . 
+has_relation('http://purl.org/datanode/ex/0.2/REXPLORE/1#knowledgeBase','http://purl.org/datanode/ex/0.2/REXPLORE/1#backgroundKnowledge','http://purl.org/datanode/ns/combinationFrom') . 
+has_relation('http://purl.org/datanode/ex/0.2/REXPLORE/1#output','http://purl.org/datanode/ex/0.2/REXPLORE/1#knowledgeBase','http://purl.org/datanode/ns/isSelectionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/REXPLORE/1#backgroundKnowledge','2899bdd6a6d8219dcb002a54c22107c9','http://purl.org/datanode/ns/hasPart') . 
+has_relation('http://purl.org/datanode/ex/0.2/REXPLORE/1#backgroundKnowledge','http://purl.org/datanode/ex/0.2/REXPLORE/1#geographicInformation','http://purl.org/datanode/ns/hasPart') . 
+has_relation('http://purl.org/datanode/ex/0.2/REXPLORE/1#backgroundKnowledge','http://purl.org/datanode/ex/0.2/REXPLORE/1#corpusOfPublications','http://purl.org/datanode/ns/hasPart') . 

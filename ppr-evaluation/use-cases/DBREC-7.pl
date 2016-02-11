@@ -1,0 +1,9 @@
+has_relation('4acaaaddfcc67c8cb4c1ddb39d464fb9','http://www.w3.org/2002/07/owl#nothing','http://purl.org/datanode/ns/disjointSection') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/7#withMisusedProperties','http://purl.org/datanode/ex/0.2/DBREC/7#withProperties','http://purl.org/datanode/ns/isSectionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/7#output','http://purl.org/datanode/ex/0.2/DBREC/7#withMisusedProperties','http://purl.org/datanode/ns/isCopyOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/7#origin','9d5c6b91fc3e00fe7b41fef18af65e97','http://purl.org/datanode/ns/hasSection') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/7#origin','http://purl.org/datanode/ex/0.2/DBREC/7#withProperties','http://purl.org/datanode/ns/hasSection') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/7#origin','http://purl.org/datanode/ex/0.2/DBREC/7#DBPedia','http://purl.org/datanode/ns/isPortionOf') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/7#withProperties','http://purl.org/datanode/ex/0.2/DBREC/7#properties','http://purl.org/datanode/ns/hasVocabulary') . 
+has_relation('http://purl.org/datanode/ex/0.2/DBREC/7#misusedProperties','http://purl.org/datanode/ex/0.2/DBREC/7#properties','http://purl.org/datanode/ns/isPortionOf') . 
+has_relation('9d5c6b91fc3e00fe7b41fef18af65e97','4acaaaddfcc67c8cb4c1ddb39d464fb9','http://purl.org/datanode/ns/hasSection') . 
