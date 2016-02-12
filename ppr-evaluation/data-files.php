@@ -15,6 +15,31 @@ function deviations($arr, $ref){
 	}
 	return $dev;
 }
+function processMonitor($file){
+    $lines = explode("\n",file_get_contents($file));
+	array_shift($lines);
+//		var_dump($lines);die;
+	$cpu = array();
+	$mem = array();
+	$rss = array();
+	foreach($lines as $row){
+		$cells = explode(',',preg_replace('/\s+/',',',$row));
+		array_push($cpu,$cells[1] + 0);
+		array_push($mem,$cells[2] + 0);
+		array_push($rss,$cells[4] + 0);
+	}
+	return array(
+		'max_cpu' => max($cpu),
+		'min_cpu' => min($cpu),
+		'avg_cpu' => avg($cpu),
+		'max_mem' => max($mem),
+		'min_mem' => min($mem),
+		'avg_mem' => avg($mem),
+		'max_rss' => max($rss),
+		'min_rss' => min($rss),
+		'avg_rss' => avg($rss)
+	);
+}
 function variance($arr, $avg){
 	$dev = deviations($arr, $avg);
 	$sum = 0;
@@ -124,7 +149,11 @@ function loadData($file){
 		$executions[$arr[0]]['files'] = explode(',',preg_replace('/[\[|\]]/','',$info[0]));
 		$executions[$arr[0]]['reasoner'] = $info[1];
 		$executions[$arr[0]]['compressed'] = $info[3] == "COMPRESSED";
-		$arr2['monitor'] = $file . '.monitor.' . $ecounter . '.' . $eecounter;
+		$monitor = $file . '.monitor.' . $ecounter . '.' . $eecounter;
+		// Monitoring data processing here
+		$monitorData = processMonitor($monitor);
+		$arr2 = array_merge($arr2,$monitorData);
+		//var_dump($arr2); die;
 		array_push($executions[$arr[0]]['executions'], $arr2);
 	}
 
@@ -139,7 +168,7 @@ function loadData($file){
 			$experiment[$k] = $exData[$k];
 		}
 		// Calculate
-		$columns = array('total','setup','load','query','size');
+		$columns = array('total','setup','load','query','size','max_cpu','max_rss');
 		foreach($columns as $col){
 			$experiment[$col] = columnStdDeviation($exData['executions'], $col);
 		}
@@ -171,7 +200,7 @@ function loadData($file){
 	// var_dump($byReasoner);die;
 	// Prolog
 	$table = array();
-	$headers = array('R','E','C','T','T_c','S','S_c','L','L_c','Q','Q_c','K','K_c');
+	$headers = array('R','E','C','T','T_c','S','S_c','L','L_c','Q','Q_c','K','K_c','P','P_c','M','M_c');
 	array_push($table, $headers);
 	foreach($byReasoner as $reason => $reas){
 		foreach($reas as $input => $exp){
@@ -180,7 +209,7 @@ function loadData($file){
 				array_push($row,$reason);
 				array_push($row,$input);
 				array_push($row,($compressed=="full")?'N':'Y');
-				foreach(array('total','setup','load','query','size') as $k){
+				foreach(array('total','setup','load','query','size','max_cpu','max_rss') as $k){
 					array_push($row,$ex[$k]['avg']);
 					array_push($row,round($ex[$k]['coeff'],2));		
 				}
@@ -195,7 +224,9 @@ function loadData($file){
 $file = isset($argv[1]) ? $argv[1] : "use-cases.txt";
 $file = "results/".$file;
 $data = loadData($file);
-generate($data, array('R=Prolog','C=Y'),array('E','T','S','L','Q','K') );
-generate($data, array('R=Prolog','C=N'),array('E','T','S','L','Q','K') );
-generate($data, array('R=SPIN','C=Y'),array('E','T','S','L','Q','K') );
-generate($data, array('R=SPIN','C=N'),array('E','T','S','L','Q','K') );
+print renderTable($data);
+die;
+generate($data, array('R=Prolog','C=Y'),array('E','T','S','L','Q','K','P','M') );
+generate($data, array('R=Prolog','C=N'),array('E','T','S','L','Q','K','P','M') );
+generate($data, array('R=SPIN','C=Y'),array('E','T','S','L','Q','K','P','M') );
+generate($data, array('R=SPIN','C=N'),array('E','T','S','L','Q','K','P','M') );
