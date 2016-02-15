@@ -1,6 +1,6 @@
 <?php
 
-define(TARGET,"/Users/ed4565/Dropbox/PhD/Propagation-SWJ/src/experiments/data/");
+define(TARGET,"/Users/ed4565/Dropbox/PhD/Propagation-SWJ/src/inc/experiments/data/");
 
 function avg($arr)
 {
@@ -119,11 +119,16 @@ function writeFile($fname, $data, $prefix= '', $postfix = '.dat'){
 	file_put_contents($prefix . $fname . $postfix, $data);
 }
 
-function generate($data,$cond,$cols=array()){
+function generate($data,$cond,$cols=array(),$fname = NULL){
 	$res = select($data, $cols, $cond);
 	$t = renderTable($res, "\t");
 	sort($cond);
-	$fname = str_replace('=','is',implode('-', $cond));
+	if($fname == NULL){
+		$fname = str_replace('=','is',implode('-', $cond));		
+	}
+	if(!$fname){
+		throw new RuntimeException('Fname is null');
+	}
 	writeFile(TARGET . $fname, $t);
 }
 function loadData($file){
@@ -168,7 +173,7 @@ function loadData($file){
 			$experiment[$k] = $exData[$k];
 		}
 		// Calculate
-		$columns = array('total','setup','load','query','size','max_cpu','max_rss');
+		$columns = array('total','setup','load','query','size','max_cpu','avg_cpu','max_rss');
 		foreach($columns as $col){
 			$experiment[$col] = columnStdDeviation($exData['executions'], $col);
 		}
@@ -200,7 +205,7 @@ function loadData($file){
 	// var_dump($byReasoner);die;
 	// Prolog
 	$table = array();
-	$headers = array('R','E','C','T','T_c','S','S_c','L','L_c','Q','Q_c','K','K_c','P','P_c','M','M_c');
+	$headers = array('R','E','C','T','T_c','S','S_c','L','L_c','Q','Q_c','K','K_c','P','P_c','Pa','Pa_c','M','M_c','F');
 	array_push($table, $headers);
 	foreach($byReasoner as $reason => $reas){
 		foreach($reas as $input => $exp){
@@ -209,24 +214,101 @@ function loadData($file){
 				array_push($row,$reason);
 				array_push($row,$input);
 				array_push($row,($compressed=="full")?'N':'Y');
-				foreach(array('total','setup','load','query','size','max_cpu','max_rss') as $k){
+				
+				foreach(array('total','setup','load','query','size','max_cpu','avg_cpu','max_rss') as $k){
 					array_push($row,$ex[$k]['avg']);
-					array_push($row,round($ex[$k]['coeff'],2));		
+					array_push($row,round($ex[$k]['coeff'], 2));
 				}
+				
+				array_push($row, implode('|',$ex['files']));
 				array_push($table, $row);
 			}
 		}
 	}
 	return $table;
 }
-///////////////////////////////////////////////////////
+function parseProlog($file){
+	$x = array();
+	$o = explode("\n", file_get_contents($file));
+//	var_dump($o);die;
+	foreach($o as $it){
+		$it = trim($it);
+		if($it){
+//			print "$it\n";
+			$p = substr($it, 0, strpos($it,'('));
+			$args = explode(',',substr($it, strpos($it,'(')+1, strpos($it,')') - strpos($it,'(') - 1 ));
+			array_push($x,array($p,$args));
+		}
+	}
+//	die;
+	return $x;
+}
+function useCases($data) {
+	$result = select($data, array('E','F'), array('C=Y'));
+	array_shift($result);
+	$useCases = array(
+		array('E','N_P','N_R','R','R_C','D','D_C','P','P_C')
+	);
+	$rc = 0;
+	foreach($result as $row){
+		$rc++;
+		$useCase = $row[1];
+		$files = $row[2];
+		$fl = explode('|', $files);
+		$arr = array();
+		$arr['has_policy'] = 0;
+		$arr['has_relation'] = 0;
+		$arr['relations'] = array();
+		$arr['nodes'] = array();
+		$arr['policies'] = array();
+		foreach($fl as $f){
+			$pl = $f . '.pl';
+			$ppl = $f . '.policies.pl';
+			$dataflow = parseProlog($pl);
+			$policies = parseProlog($ppl);
+			$all = array_merge($dataflow, $policies);
+			foreach($all as $a){
+				$arr[$a[0]]++;
+				if($a[0] == 'has_relation'){
+					array_push($arr['nodes'],$a[1][0]);
+					array_push($arr['nodes'],$a[1][1]);
+					array_push($arr['relations'],$a[1][2]);
+				}
+				if($a[0] == 'has_policy'){
+					array_push($arr['nodes'],$a[1][0]);
+					array_push($arr['policies'],$a[1][1]);
+				}
+			}
+			$arr['relations'] = array_unique($arr['relations'], SORT_STRING);
+			$arr['nodes'] = array_unique($arr['nodes'], SORT_STRING);
+			$arr['policies'] = array_unique($arr['policies'], SORT_STRING);
+		}
+		array_push($useCases,
+				array(	
+					$useCase,
+					$arr['has_policy'],
+					$arr['has_relation'],
+					implode(',', $arr['relations']),
+					count($arr['relations']),
+					implode(',', $arr['nodes']),
+					count($arr['nodes']),
+					implode(',', $arr['policies']),
+					count($arr['policies'])));
+	}
+	return $useCases;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $file = isset($argv[1]) ? $argv[1] : "use-cases.txt";
 $file = "results/".$file;
 $data = loadData($file);
-print renderTable($data);
-die;
-generate($data, array('R=Prolog','C=Y'),array('E','T','S','L','Q','K','P','M') );
-generate($data, array('R=Prolog','C=N'),array('E','T','S','L','Q','K','P','M') );
-generate($data, array('R=SPIN','C=Y'),array('E','T','S','L','Q','K','P','M') );
-generate($data, array('R=SPIN','C=N'),array('E','T','S','L','Q','K','P','M') );
+$uc = useCases($data);
+
+// print renderTable($uc,"\t");
+// die;
+// die;
+generate($uc, array(), array('E','N_P','N_R','R_C','D_C','P_C') ,'UC');
+generate($data, array('R=Prolog','C=Y'),array('E','T','S','L','Q','K','Pa','M') );
+generate($data, array('R=Prolog','C=N'),array('E','T','S','L','Q','K','Pa','M') );
+generate($data, array('R=SPIN','C=Y'),array('E','T','S','L','Q','K','Pa','M') );
+generate($data, array('R=SPIN','C=N'),array('E','T','S','L','Q','K','Pa','M') );
