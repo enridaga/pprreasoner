@@ -1,3 +1,4 @@
+# output
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix : <http://purl.org/datanode/ex/0.2/REXPLORE/4#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -10,8 +11,8 @@
 
 <http://purl.org/datanode/ex/0.2/REXPLORE/4#>
     a foaf:Document ;
-    rdfs:comment "0) Have the affiliation as string 1) Retrieve standard identifier using wikipedia 2) Search the location of the affiliation in dbpedia, or 3) Search the location of the affiliation in the wikipedia page 4) Map the location to a GeoNames ID 5) Or simplify the affiliation name and search it in the GeoNames database the ID" ;
-    rdfs:label "The data sources used by Rexplore offer in most cases only the name of the author’s affiliation  (e.g., Universities, Research Labs, Hospitals), which is usually derived from parsing research  papers and thus it is simply treated as a string.  The procedure uses initially Wikipedia to retrieve a ‘standard’ identifier for the affiliation and then  searches for the location associated with the affiliation in DBpedia. If the latter search is unsuccessful,  then the Wikipedia page is parsed for the tag “location” from which city and country are extracted using a  set of heuristic rules. After recovering information about the city or the country, the affiliation is mapped  to the correct GeoNames ID. If the search for affiliation and/or location in Wikipedia/DBpedia fails, then the  affiliation name is stripped of a set of typical terms, such as “university”, “college” or “hospital”, and the  remaining string is searched for in the GeoNames database. This simple method provided good results, allowing  us to correctly map disambiguated affiliations to GeoNames in about 85% of the cases." .
+	rdfs:label "REXPLORE/4" ;
+    skos:note "The data sources used by Rexplore offer in most cases only the name of the author’s affiliation  (e.g., Universities, Research Labs, Hospitals), which is usually derived from parsing research  papers and thus it is simply treated as a string.  The procedure uses initially Wikipedia to retrieve a ‘standard’ identifier for the affiliation and then  searches for the location associated with the affiliation in DBpedia. If the latter search is unsuccessful,  then the Wikipedia page is parsed for the tag “location” from which city and country are extracted using a  set of heuristic rules. After recovering information about the city or the country, the affiliation is mapped  to the correct GeoNames ID. If the search for affiliation and/or location in Wikipedia/DBpedia fails, then the  affiliation name is stripped of a set of typical terms, such as “university”, “college” or “hospital”, and the  remaining string is searched for in the GeoNames database. This simple method provided good results, allowing  us to correctly map disambiguated affiliations to GeoNames in about 85% of the cases." .
 
 :affiliationsIdentifiers
     dn:extractedFrom :Wikipedia ;
@@ -21,7 +22,7 @@
     dn:isSectionOf :corpusOfPublications .
 
 :locations
-    dn:isSelectionOf :Geonames ;
+    dn:isSelectionOf :GeoNames ;
     dn:processedFrom :locationsNames .
 
 :locationsFromDBPedia
@@ -39,4 +40,6 @@
     dn:processedFrom [
         dn:isSelectionOf :affiliationsStrings
     ] .
-
+:output
+	dn:hasSection :affiliationsIdentifiers,:simplifiedLocationsNames,:locations
+	.

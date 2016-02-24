@@ -20,7 +20,7 @@ function monitor {
 	  while kill -0 $process 2> /dev/null; do
 		[ "$SECONDS" -gt "$MS" ] && break || errcho -n "."
 		ps -p $process -o pid,%cpu,%mem,vsz,rss|sed 1d
-		sleep 0.5
+		sleep 0.2
 	  done
 	  [ "$SECONDS" -gt "$MS" ] && kill $process && errcho " Interrupted." || errcho " Done."
 	fi
@@ -41,7 +41,7 @@ do
   if [ ! -z "$args" ]; then
   for a in `seq $times`
   do
-    sleep 1
+    sleep 5
     exec 1<&-
     exec 1<>$result.monitor.$count.$a
     errcho "$count $a - $args"

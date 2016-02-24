@@ -1,0 +1,5 @@
+-c 0 -r Prolog -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-4 -q http://purl.org/datanode/ex/0.2/REXPLORE/4#output
+-c 1 -r Prolog -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-4 -q http://purl.org/datanode/ex/0.2/REXPLORE/4#output
+-c 0 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-4 -q http://purl.org/datanode/ex/0.2/REXPLORE/4#output
+-c 1 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-4 -q http://purl.org/datanode/ex/0.2/REXPLORE/4#output
+
