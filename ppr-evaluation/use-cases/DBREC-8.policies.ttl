@@ -3,6 +3,7 @@
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix : <http://purl.org/datanode/ex/0.2/DBREC/8#> .
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix ppr: <http://purl.org/datanode/ppr/ns/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix dbpedia: <http://dbpedia.org/resource/> .
@@ -16,7 +17,7 @@
 	
 <http://purl.org/NET/rdflicense/cc-by-sa3.0>
         a odrl:Policy ;
-		odrl:asset :DBPedia ;
+		ppr:asset :DBPedia ;
 		dct:hasVersion "3.0" ;
 		rdfs:label   "Creative Commons CC-BY-SA 3.0";
 		dct:language <http://www.lexvo.org/page/iso639-3/eng>;

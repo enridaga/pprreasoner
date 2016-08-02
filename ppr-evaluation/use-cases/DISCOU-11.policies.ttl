@@ -20,11 +20,12 @@
 @prefix dbprop: <http://dbpedia.org/property/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix ppr: <http://purl.org/datanode/ppr/ns/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix ldr: <http://purl.oclc.org/NET/ldr/ns#> .
 
 [] a odrl:Set ;
-	odrl:asset :input ;
+	ppr:asset :input ;
 	odrl:permission odrl:read, odrl:copy, odrl:modify, cc:Distribution, odrl:display 
 	.

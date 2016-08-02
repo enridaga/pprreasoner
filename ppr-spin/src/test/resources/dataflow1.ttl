@@ -9,6 +9,7 @@
 @prefix dn: <http://purl.org/datanode/ns/>.
 @prefix cc: <http://creativecommons.org/ns#>.
 @prefix odrl: <http://www.w3.org/ns/odrl/2/>.
+@prefix ppr: <http://purl.org/datanode/ppr/ns/>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix : <http://purl.org/datanode/ppr/example/>.
 
@@ -16,7 +17,7 @@
 :output a dn:Datanode .
 
 [] a odrl:Set ;
-  odrl:asset :input ;
+  ppr:asset :input ;
   odrl:prohibition odrl:grantUse ;
   odrl:prohibition odrl:present ;
   odrl:duty cc:Attribution ;

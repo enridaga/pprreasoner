@@ -8,19 +8,20 @@
 @prefix void: <http://rdfs.org/ns/void#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix ppr: <http://purl.org/datanode/ppr/ns/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix ldr: <http://purl.oclc.org/NET/ldr/ns#> .
 @prefix : <http://purl.org/datanode/ex/0.2/REXPLORE/1#> .
 
 :odc-by a odrl:Set ;
-	odrl:asset :DBLP ;
+	ppr:asset :DBLP ;
 	odrl:permission cc:Distribution, odrl:copy, odrl:modify, cc:DerivativeWorks, cc:Reproduction ;
 	odrl:duty cc:Attribution
 	.
 	
 :cc-by-sa a odrl:Set ;
-	odrl:asset :DBPedia;
+	ppr:asset :DBPedia;
 	dct:hasVersion "3.0" ;
 	rdfs:label   "Creative Commons CC-BY-SA 3.0";
 	dct:language <http://www.lexvo.org/page/iso639-3/eng>;
@@ -35,7 +36,7 @@
 .
 
 :cc-by a odrl:Set ;
-	odrl:asset :GeoNames ;
+	ppr:asset :GeoNames ;
 	dct:hasVersion "3.0" ;
 	rdfs:label   "Creative Commons CC-BY 3.0";
 	dct:language <http://www.lexvo.org/page/iso639-3/eng>;

@@ -9,11 +9,12 @@
 @prefix dn: <http://purl.org/datanode/ns/>.
 @prefix cc: <http://creativecommons.org/ns#>.
 @prefix odrl: <http://www.w3.org/ns/odrl/2/>.
+@prefix ppr: <http://purl.org/datanode/ppr/ns/>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix : <http://purl.org/datanode/ppr/example/>.
 
 [] a odrl:Set ;
-  odrl:asset :input3a ;
+  ppr:asset :input3a ;
   odrl:permission odrl:modify ;
   odrl:prohibition odrl:grantUse ;
   odrl:prohibition odrl:present ;
@@ -21,7 +22,7 @@
   .
 
 [] a odrl:Set ;
-  odrl:asset :input3b ;
+  ppr:asset :input3b ;
   odrl:duty cc:Attribution ;
   odrl:duty cc:ShareAlike ;  
   .

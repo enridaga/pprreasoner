@@ -17,13 +17,13 @@ public class DatanodeRDF2PrologTest {
 		}
 	}
 	
-	@Test
-	public void propagates() throws FileNotFoundException, URISyntaxException{
-		Iterator<String> sss = Dataflow2Prolog.propagatesFromTTL(new File(getClass().getClassLoader().getResource("./propagates.nt").toURI()));
-		while(sss.hasNext()){
-			System.out.println(sss.next());
-		}
-	}
+//	@Test
+//	public void propagates() throws FileNotFoundException, URISyntaxException{
+//		Iterator<String> sss = Dataflow2Prolog.propagatesFromTTL(new File(getClass().getClassLoader().getResource("./propagates.nt").toURI()));
+//		while(sss.hasNext()){
+//			System.out.println(sss.next());
+//		}
+//	}
 	
 
 	@Test

@@ -26,6 +26,10 @@ public class Dataflow2Prolog {
 
 	public static synchronized Iterator<String> propagatesFromTTL(File ttl) throws FileNotFoundException {
 		Model m = loadTTL(ttl);
+		StmtIterator t = m.listStatements();
+		while(t.hasNext()){
+			System.out.println(t.next());
+		}
 		return buildPropagates(m);
 	}
 
@@ -77,7 +81,7 @@ public class Dataflow2Prolog {
 			protected Statement findNextStatement() {
 				while (i.hasNext()) {
 					Statement s = i.next();
-					if (s.getPredicate().getURI().equals("http://www.w3.org/ns/odrl/2/asset")) {
+					if (s.getPredicate().getURI().equals("http://purl.org/datanode/ppr/ns/asset")) {
 						return s;
 					}
 				}
@@ -174,9 +178,12 @@ public class Dataflow2Prolog {
 			}
 
 			protected String translate(Statement st) {
+				
 				// Translate statement
 				StringBuilder sb = new StringBuilder();
 				StmtIterator v = m.listStatements(st.getObject().asResource(), null, (RDFNode) null);
+				System.out.println(m.size());
+				System.out.println(v.toList().size());
 				sb.append("propagates(");
 				sb.append("'").append(st.getSubject().toString()).append("','");
 				while (v.hasNext()) {

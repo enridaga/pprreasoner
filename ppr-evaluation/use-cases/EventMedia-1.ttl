@@ -25,6 +25,7 @@
 @prefix dbprop: <http://dbpedia.org/property/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix ppr: <http://purl.org/datanode/ppr/ns/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix ldr: <http://purl.oclc.org/NET/ldr/ns#> .

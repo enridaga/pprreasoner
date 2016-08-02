@@ -12,10 +12,11 @@ public class PoliciesNormalizer {
 
 	public static Model normalize(Model input){
 		Model m = ModelFactory.createDefaultModel();
-		String PREFIX = "prefix odrl: <http://www.w3.org/ns/odrl/2/> ";
+		String PREFIX = "prefix odrl: <http://www.w3.org/ns/odrl/2/> "
+				+ "prefix ppr: <http://purl.org/datanode/ppr/ns/> ";
 		String WHERE = " WHERE "
 				+ "{ "
-				+ "?p odrl:asset ?asset . "
+				+ "?p ppr:asset ?asset . "
 				+ " { "
 				+ "   ?p ?deontic ?action . "
 				+ " } UNION { "

@@ -26,7 +26,7 @@ function monitor {
 	fi
 }
 
-suite=${1:-./suites/full.txt}
+suite=${1:-./suites/use-cases.txt}
 times=${2:-1}
 interrupt=${3:-300} # almost 5 minutes
 result=results/$(basename "$suite")

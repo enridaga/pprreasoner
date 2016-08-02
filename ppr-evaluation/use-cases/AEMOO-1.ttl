@@ -11,6 +11,7 @@
 @prefix cc: <http://creativecommons.org/ns#> .
 @prefix : <http://purl.org/datanode/ex/0.2/AEMOO/1#> .
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix ppr: <http://purl.org/datanode/ppr/ns/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix dbpedia: <http://dbpedia.org/resource/> .
