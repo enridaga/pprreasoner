@@ -26,3 +26,7 @@ Monitoring 56231 (will interrupt in 300 seconds)
 ./evaluation.sh: line 55: kill: (56231) - No such process
 ./evaluation.sh: line 55: kill: (56229) - No such process
 ```
+
+To run the full experiments simply execute the script without arguments.
+Please note that this will probably take hours, as there are 15 use cases, performed 4 times with different parameters (compression and reasoner implementation), and repeated 20 times.
+On a Macbook Pro i7 with 16G RAM takes approximately 10 hours.
