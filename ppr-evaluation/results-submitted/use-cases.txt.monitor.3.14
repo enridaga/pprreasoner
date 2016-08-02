@@ -1,0 +1,9 @@
+#3 #14 - -c 0 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/AEMOO-1 -q http://purl.org/datanode/ex/0.2/AEMOO/1#resourceSummary
+19511   0.0  0.2  8199676  27136
+19511  90.5  0.3  8200000  47100
+19511 137.9  0.4  8204656  71248
+19511 260.6  0.6  8214032 100404
+19511 285.1  0.8  8217156 127484
+19511 314.1  0.9  8222160 156780
+19511 327.8  0.9  8226936 159364
+19511 323.5  1.0  8226792 171948

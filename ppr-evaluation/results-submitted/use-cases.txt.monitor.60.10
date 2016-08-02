@@ -1,0 +1,9 @@
+#60 #10 - -c 1 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-4 -q http://purl.org/datanode/ex/0.2/REXPLORE/4#output
+41737   4.7  0.2  8199676  28728
+41737  95.1  0.3  8200000  46628
+41737 145.0  0.4  8204656  69980
+41737 218.0  0.6  8214364 101208
+41737 290.5  0.7  8212208 116784
+41737 313.0  0.9  8224084 157656
+41737 311.6  0.9  8224604 156524
+41737   0.0  0.0        0      0

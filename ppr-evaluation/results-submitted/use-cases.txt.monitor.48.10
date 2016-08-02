@@ -1,0 +1,9 @@
+#48 #10 - -c 1 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/EventMedia-1 -q http://purl.org/datanode/ex/0.2/EventMedia/1#output
+20964   4.6  0.2  8199676  27668
+20964 102.7  0.3  8200000  47464
+20964 147.0  0.4  8204656  71212
+20964 227.2  0.6  8211896  99140
+20964 284.9  0.8  8222260 128296
+20964 309.2  1.0  8227420 163060
+20964 328.3  0.9  8221892 158492
+20964 317.0  1.0  8223092 171768

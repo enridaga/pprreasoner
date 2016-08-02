@@ -1,0 +1,8 @@
+#16 #14 - -c 1 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/DBREC-3 -q http://purl.org/datanode/ex/0.2/DBREC/3#output
+52591   2.0  0.2  8199676  27656
+52591  78.3  0.3  8200000  44380
+52591 130.1  0.4  8202760  64440
+52591 196.3  0.6  8218992 106492
+52591 269.4  0.7  8211608 114592
+52591 306.9  0.8  8218880 135964
+52591 325.5  1.0  8232108 163124

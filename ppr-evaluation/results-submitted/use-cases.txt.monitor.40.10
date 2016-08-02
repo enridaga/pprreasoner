@@ -1,0 +1,8 @@
+#40 #10 - -c 1 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/DISCOU-1 -q http://purl.org/datanode/ex/0.2/DISCOU/1#similarResources
+98965  12.6  0.2  8199676  27948
+98965 110.9  0.3  8200000  46916
+98965 135.4  0.4  8204656  70244
+98965 238.3  0.6  8219972 107616
+98965 285.7  0.7  8212444 119880
+98965 313.4  0.9  8218888 152604
+98965 325.8  1.0  8241152 162952

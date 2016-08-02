@@ -1,0 +1,8 @@
+#44 #12 - -c 1 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/DISCOU-11 -q http://purl.org/datanode/ex/0.2/DISCOU/11#output
+ 8208   0.1  0.2  8199676  28316
+ 8208  95.9  0.3  8200000  47496
+ 8208 144.3  0.4  8204656  71296
+ 8208 250.4  0.6  8214380 103576
+ 8208 264.2  0.7  8214048 119748
+ 8208 295.8  1.0  8224756 159620
+ 8208 306.5  0.9  8232760 155100

@@ -1,0 +1,9 @@
+#40 #18 - -c 1 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/DISCOU-1 -q http://purl.org/datanode/ex/0.2/DISCOU/1#similarResources
+99209  43.2  0.2  8199676  28128
+99209  90.0  0.3  8200000  47284
+99209 135.7  0.4  8202776  67800
+99209 249.2  0.7  8220700 112056
+99209 286.8  0.7  8212512 118120
+99209 308.3  0.9  8216628 150388
+99209 335.8  0.9  8217724 157084
+99209   0.0  0.0        0      0

@@ -1,0 +1,9 @@
+#60 #15 - -c 1 -r SPIN -k EVOLVED -d /Users/ed4565/Workspaces/TheWS/ppreasoner/ppr-evaluation/use-cases/REXPLORE-4 -q http://purl.org/datanode/ex/0.2/REXPLORE/4#output
+41893   9.2  0.2  8199676  28960
+41893 105.6  0.3  8200000  47084
+41893 152.1  0.4  8204656  70556
+41893 226.8  0.6  8211792 100160
+41893 270.1  0.7  8219416 123704
+41893 286.9  0.9  8219920 151368
+41893 300.9  1.0  8225896 161560
+41893   0.0  0.0        0      0
