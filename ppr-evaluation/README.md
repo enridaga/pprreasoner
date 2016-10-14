@@ -30,3 +30,8 @@ Monitoring 56231 (will interrupt in 300 seconds)
 To run the full experiments simply execute the script without arguments.
 Please note that this will probably take hours, as there are 15 use cases, performed 4 times with different parameters (compression and reasoner implementation), and repeated 20 times.
 On a Macbook Pro i7 with 16G RAM takes approximately 10 hours.
+
+
+Note: In the ttl files of the policies, the odrl:Policy is linked to the data objects using the proprietary term ppr:asset.
+However, the reasoner works indifferently with the standard method (based on associating each odrl:Rule to a asset via the odrl:target property).
+Anyway, this does not affect the performance of the reasoner as the input data is rewritten with an internal model.
