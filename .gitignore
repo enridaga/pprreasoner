@@ -1,5 +1,3 @@
-./ppr-evaluation/experiment.log
-ppr-evaluation/results/
 .metadata
 bin/
 tmp/
@@ -55,3 +53,13 @@ target/
 
 # MAC-OSX
 **/.DS_Store
+
+# Local
+ppr-evaluation/CisY-RisProlog.dat
+ppr-evaluation/evaluation.out
+ppr-evaluation/experiment.log
+ppr-evaluation/results0/
+ppr-evaluation/results1/
+ppr-evaluation/results2/
+./ppr-evaluation/experiment.log
+ppr-evaluation/results/
