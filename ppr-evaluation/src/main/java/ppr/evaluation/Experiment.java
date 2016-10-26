@@ -126,7 +126,7 @@ public class Experiment {
 				c = cmd.getOptionValue('c').equals("1") ? Rules.COMPRESSED : Rules.FULL;
 				d = cmd.getOptionValue('d');
 				s = cmd.hasOption('s') ? true : false;
-				q = cmd.getOptionValue('q').split(" ");
+				q = cmd.getOptionValue('q').split(",");
 			} catch (ParseException e) {
 				E.println("Failed to parse comand line properties");
 				e.printStackTrace();
@@ -308,7 +308,7 @@ public class Experiment {
 	}
 
 	public ExperimentResult perform(String... assets) throws Exception {
-
+		
 		final Map<String, Set<String>> policies = new HashMap<String, Set<String>>();
 		for (String ass : assets) {
 			Set<String> pol = reasoner.policies(ass);
