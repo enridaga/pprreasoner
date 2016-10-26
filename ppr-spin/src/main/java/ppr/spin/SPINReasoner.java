@@ -167,6 +167,22 @@ public class SPINReasoner implements PPRReasoner, PPRReasonerObservable {
 				+ "{ [] <http://purl.org/datanode/ppr/ns/asset> ?asset ; "
 				+ "     <http://www.w3.org/ns/odrl/2/duty> ?action . "
 				+ " ?policy <http://www.w3.org/ns/odrl/2/duty> ?action . } "
+				+ " UNION "
+				+ "{ [] <http://purl.org/datanode/ppr/ns/asset> ?asset ; "
+				+ "     <http://www.w3.org/ns/odrl/2/prohibition> [ <http://www.w3.org/ns/odrl/2/action> ?action ] . "
+				+ "?policy <http://www.w3.org/ns/odrl/2/prohibition> ?action . } "
+				+ " UNION "
+				+ "{ [] <http://purl.org/datanode/ppr/ns/asset> ?asset ; "
+				+ "     <http://www.w3.org/ns/odrl/2/permission> [ <http://www.w3.org/ns/odrl/2/action> ?action ] . "
+				+ " ?policy <http://www.w3.org/ns/odrl/2/permission> ?action . } "
+				+ " UNION "
+				+ "{ [] <http://purl.org/datanode/ppr/ns/asset> ?asset ; "
+				+ "     <http://www.w3.org/ns/odrl/2/permission> [ <http://www.w3.org/ns/odrl/2/duty> [ <http://www.w3.org/ns/odrl/2/action>  ?action ]] . "
+				+ " ?policy <http://www.w3.org/ns/odrl/2/duty> ?action . } "
+				+ " UNION "
+				+ "{ [] <http://purl.org/datanode/ppr/ns/asset> ?asset ; "
+				+ "     <http://www.w3.org/ns/odrl/2/duty> [ <http://www.w3.org/ns/odrl/2/action> ?action ]. "
+				+ " ?policy <http://www.w3.org/ns/odrl/2/duty> ?action . } "
 				+ "}", model);
 		return exec.execConstruct();
 	}
