@@ -154,6 +154,33 @@
 				<artifactId>commons-cli</artifactId>
 				<version>1.2</version>
 			</dependency>
+			
+			<!-- This porject -->
+			<dependency>
+				<groupId>ppr</groupId>
+				<artifactId>spin</artifactId>
+				<version>${ppr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ppr</groupId>
+				<artifactId>prolog</artifactId>
+				<version>${ppr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ppr</groupId>
+				<artifactId>reasoner</artifactId>
+				<version>${ppr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ppr</groupId>
+				<artifactId>server</artifactId>
+				<version>${ppr.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ppr</groupId>
+				<artifactId>cli</artifactId>
+				<version>${ppr.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>

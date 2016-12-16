@@ -1,9 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>evaluation</artifactId>
+	<artifactId>cli</artifactId>
 	<build>
-		
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -23,10 +22,10 @@
 					</descriptorRefs>
 					<archive>
 						<manifest>
-							<mainClass>ppr.evaluation.Experiment</mainClass>
+							<mainClass>ppr.cli.Main</mainClass>
 						</manifest>
 					</archive>
-					<finalName>experiment-${project.version}</finalName>
+					<finalName>cli-${project.version}</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>
@@ -48,10 +47,6 @@
 		<relativePath>../ppr-parent</relativePath>
 	</parent>
 	<dependencies>
-		<dependency>
-			<groupId>ppr</groupId>
-			<artifactId>prolog</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>ppr</groupId>
 			<artifactId>spin</artifactId>
