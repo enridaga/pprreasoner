@@ -9,7 +9,8 @@
   <packaging>pom</packaging>
   <modules>
   	<module>ppr-parent</module>
-  	<module>ppr-prolog</module>	
+  	<module>ppr-prolog</module>
+  	<module>ppr-cli</module>	
   	<module>ppr-server</module>
   	<module>ppr-spin</module>
   	<module>ppr-evaluation</module>
